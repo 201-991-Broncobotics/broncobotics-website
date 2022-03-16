@@ -1,15 +1,15 @@
 import { useState } from 'react'
 import logo from './logo.svg'
-import Navbar from "./components/Navbar"
+import Header from "./components/Header"
 
-function App() {
+function Home() {
 
   return (
     <div className="app">
-      <Navbar />
+      <Header currentPage='home'/>
 
     </div>
   )
 }
 
-export default App
+export default Home
