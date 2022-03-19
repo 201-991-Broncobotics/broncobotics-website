@@ -1,17 +1,14 @@
-import React from 'react'
-import Navbar from './components/Navbar'
+import Header from "./components/Header"
 
 function About() {
   return (
     <div>
-        <Navbar currentPage='about'/>
+        <Header currentPage='about'/>
         <div>
             <p>
-                BroncoBotics is the robotics club of <a href='https://www.brophyprep.org/'>Brophy College Preparatory</a>, a Catholic Jesuit High School located in 
+                BroncoBotics is the robotics club of <a href='https://www.brophyprep.org/'>Brophy College Preparatory</a>, a Private Jesuit High School located in Phoenix, Arizona. 
             </p>
         </div>
-    
-    
     </div>
   )
 }

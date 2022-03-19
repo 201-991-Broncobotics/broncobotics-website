@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from './components/Navbar'
+import Header from './components/Header'
 
 function Photos() {
   return (
     <div>
-        <Navbar currentPage='photos'/>
+        <Header currentPage='photos'/>
     </div>
   )
 }

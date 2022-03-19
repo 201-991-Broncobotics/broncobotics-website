@@ -9,11 +9,9 @@ let a: React.ReactNode;
 function Header(props: HeaderProps) {
 
 
-
-  if (props.currentPage === 'home') {
+  if  (props.currentPage === 'join') {
     a = <div className='bg-inherit'><div className='text-center text-white' style={{marginTop:'3rem', fontFamily: "Martel", fontSize: "7.5rem"}}>BroncoBotics</div><div className='text-center text-white' style={{marginTop:'-.75rem', fontFamily: "Martel", fontSize: "3rem"}}>Together to Create</div></div>
   }
-
   else if (props.currentPage === 'about') {
     a = <div className='bg-inherit'><div className='text-center text-white' style={{marginTop:'3rem', fontFamily: "Martel", fontSize: "7.5rem"}}>BroncoBotics</div><div className='text-center text-white' style={{marginTop:'-.75rem', fontFamily: "Martel", fontSize: "3rem"}}>Together to Create</div></div>
   }
@@ -22,9 +20,10 @@ function Header(props: HeaderProps) {
     a = <div className='bg-inherit'><div className='text-center text-white' style={{marginTop:'3rem', fontFamily: "Martel", fontSize: "7.5rem"}}>BroncoBotics</div><div className='text-center text-white' style={{marginTop:'-.75rem', fontFamily: "Martel", fontSize: "3rem"}}>Together to Create</div></div>
   }
 
-  else  (props.currentPage === 'join'); {
+  else (props.currentPage === 'home'); {
     a = <div className='bg-inherit'><div className='text-center text-white' style={{marginTop:'3rem', fontFamily: "Martel", fontSize: "7.5rem"}}>BroncoBotics</div><div className='text-center text-white' style={{marginTop:'-.75rem', fontFamily: "Martel", fontSize: "3rem"}}>Together to Create</div></div>
   }
+  
 
 
   return (

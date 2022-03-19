@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from './components/Navbar'
+import Header from "./components/Header"
 
 function Join() {
   return (
     <div>
-        <Navbar currentPage='join'/>
+        <Header currentPage='join'/>
     </div>
   )
 }
