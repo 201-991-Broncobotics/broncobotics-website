@@ -10,7 +10,7 @@ const Navbar = (props: NavbarProps) => {
     
     let defaulClassName: string = "block py-2 pr-4 pl-3 "
     let otherPage: string = " hover:text-gray-300 text-white "
-    let choosePage: string = " text-red-500 hover:text-red-400 "
+    let choosePage: string = " text-red-500 hover:text-[#d63838] "
     // console.log(choosePage + defaulClassName);
     let aboutClass: string = (props.currentPage === "about" ? choosePage + defaulClassName : defaulClassName + otherPage);
     let competitionsClass: string = (props.currentPage === "competitions" ? choosePage + defaulClassName : defaulClassName + otherPage);

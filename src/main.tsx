@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Home from './Home'
 import About from "./About"
+import Socials from "./Socials"
 
 import Photos from "./Photos"
 import Join from "./Join"
@@ -15,6 +16,7 @@ ReactDOM.render(
       <Route path="/about" element={<About />}></Route>
       <Route path="/photos" element={<Photos />}></Route>
       <Route path="/join" element={<Join />}></Route>
+      <Route path="/socials" element={<Socials />}></Route>
     </Routes>
   </BrowserRouter>,
   document.getElementById('root')
