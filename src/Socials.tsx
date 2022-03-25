@@ -3,7 +3,7 @@ import Header from "./components/Header"
 import Footer from './components/Footer'
 
 const Socials = () => {
-    let liFormatting: string = "my-2 bg-gray-400 rounded-xl border-2 hover:border-red-500 hover:bg-[#6d6e71] hover:text-white hover:font-semibold"
+    let liFormatting: string = "my-2 bg-red-500 rounded-xl border-2  hover:bg-white hover:text-black hover:border-red-500"
     return (      
     <div className='' style={{backgroundColor: "rgb(109,110,113)"}}>
         <Header currentPage='socials'/>

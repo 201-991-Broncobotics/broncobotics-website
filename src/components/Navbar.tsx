@@ -8,8 +8,8 @@ interface NavbarProps {
 
 const Navbar = (props: NavbarProps) => {
     
-    let defaulClassName: string = "block py-2 pr-4 pl-3 "
-    let otherPage: string = " hover:text-gray-300 text-white "
+    let defaulClassName: string = "block py-2 pr-4 pl-3 text-base"
+    let otherPage: string = " hover:text-gray-300 text-white"
     let choosePage: string = " text-red-500 hover:text-[#d63838] "
     // console.log(choosePage + defaulClassName);
     let aboutClass: string = (props.currentPage === "about" ? choosePage + defaulClassName : defaulClassName + otherPage);
@@ -19,11 +19,11 @@ const Navbar = (props: NavbarProps) => {
     let homeClass: string = (props.currentPage === "home" ? "self-center text-xl font-semibold whitespace-nowrap ".concat(choosePage) : "self-center text-xl font-semibold whitespace-nowrap ".concat(otherPage))
     
     return (
-        <div className='' style={{"backgroundImage":"url(\"https://github.com/rgodha24/broncobotics-website/blob/master/src/header-bg-opacity.png?raw=true\")", height:"26rem", width: 'auto',"backgroundPosition":"center","backgroundRepeat":"no-repeat","backgroundSize":"cover","position":"relative"}}>
+        <header className='text-red-500 ' style={{"backgroundImage":"url(\"/src/header-bg-opacity.png\")", height:"26rem", width: 'auto',"backgroundPosition":"center","backgroundRepeat":"no-repeat","backgroundSize":"cover","position":"relative"}}>
             <nav className="px-2 sm:px-4 py-2.5 bg-inherit">
                 <div className="container flex flex-wrap justify-between items-center mx-auto">
                     <a href="/#" className="flex items-center">
-                        <img src="https://raw.githubusercontent.com/rgodha24/broncobotics-website/master/src/logo.svg" className="mr-3 h-6 sm:h-10" alt="BroncoBotics Logo" />
+                        <img src='/src/logo.svg' className="mr-3 h-6 sm:h-10" alt="BroncoBotics Logo" />
                         <span className={homeClass} style={{fontFamily: 'DM Serif Text',}}>BroncoBotics</span>
                     </a>
                     <button data-collapse-toggle="mobile-menu" type="button" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
@@ -47,7 +47,7 @@ const Navbar = (props: NavbarProps) => {
                 </div>
             </nav>
             {props.aboveImageText}
-        </div>
+        </header>
         )
 }
 
