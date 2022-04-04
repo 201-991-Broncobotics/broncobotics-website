@@ -7,6 +7,7 @@ const Socials = () => {
     return (      
     <div className='' style={{backgroundColor: "rgb(109,110,113)"}}>
         <Header currentPage='socials'/>
+        <div className='my-4 text-white text-5xl text-center m-auto ' style={{fontFamily: "Roboto Slab"}}>Follow us on Social Media!</div>
         <ul className=' m-auto text-center w-1/5 text-4xl '  >
             <a href="https://github.com/201-991-Broncobotics"><li className={liFormatting} style={{fontFamily: "Roboto Slab"}}>GitHub</li></a>
             <a href="https://www.google.com/url?q=https%3A%2F%2Fbrophyrobotics.slack.com&sa=D&sntz=1&usg=AOvVaw01uPHac9sfJOxtBwhb2MA7"><li className={liFormatting} style={{fontFamily: "Roboto Slab"}}>Slack</li></a>

@@ -7,7 +7,7 @@ function About() {
   return (
     <div>
         <Header currentPage='about'/>
-        <div className="text-white mx-4 px-4 mt-6 text-cente" style={{fontFamily: "Open Sans"}}>
+        <div className="text-white mx-4 px-4 mt-6 text-center" style={{fontFamily: "Open Sans"}}>
             <p className="text-lg font-mono font-semibold">
                 BroncoBotics is the robotics club of <a href='https://www.brophyprep.org/' className="text-blue-400 underline hover:text-blue-300 hover:no-underline hover:opacity-90 ">Brophy College Preparatory</a>, a Private Jesuit High School located in Central Phoenix. 
             </p>
