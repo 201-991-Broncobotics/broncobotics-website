@@ -1,17 +1,12 @@
 import React from 'react'
-import Header from "./components/Header"
-import Footer from "./components/Footer"
+import Header from "../components/Header"
+import Footer from "../components/Footer"
 
 function Join() {
   return (
     <div >
-        <Header currentPage='join'/>
-        <div style={{fontFamily:"Roboto Slab"}} className="mx-6">
-          <div className='text-white text-2xl text-center mt-4 font-bold'>How to Join</div>
-          <div className='text-white text-lg text-center '>
-            BroncoBotics is a school team, so it is only open to students of <a href='https://brophyprep.org/'>Brophy College Preparatory</a>. If you are a student of Brophy, email <a href="mailto:sgodbole23@brophybroncos.org">Sameer Godbole</a> or just come down to the IC on a Tuesday or Thursday after school. We welcome anyone who wants to join robotics so come down and join!
-          </div>
-
+        <Header currentPage='brophy'/>
+        <div style={{fontFamily:"Roboto Slab"}} className="mx-16">
           <div className='text-white text-2xl text-center mt-4 font-bold' >What is Brophy?</div>
           <div className='text-white text-lg text-center'>
             If you want to join Brophy, go to to <a href="https://brophyprep.org/Admissions/Learn-More">this website</a>. Brophy College Preparatory is an all boys Jesuit Catholic Private School with financial based scholarships available to those who need it. 
