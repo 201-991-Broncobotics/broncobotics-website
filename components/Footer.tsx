@@ -22,22 +22,25 @@ const Footer = () => {
 				<div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center  ">
 					<a
 						href="https://www.youtube.com/channel/UC4-iVzitzOrSvx6bt9QqJWA/videos"
-						className="hover:opacity-60"
+						className="hover:opacity-60 w-5 h-5 "
 					>
 						<Image
 							src={yt_icon}
 							alt="youtube logo"
-							className="h-5 w-5 rounded-lg object-cover"
+							className="rounded-lg"
+							layout='intrinsic'
+							objectFit='fill'
 						/>
 					</a>
 					<a
 						href="https://brophyrobotics.slack.com"
-						className="hover:opacity-60"
+						className="hover:opacity-60 w-5 h-5"
 					>
 						<Image
 							src={slack}
 							alt="slack logo"
-							className="h-5 w-5 object-cover "
+							className="object-cover "
+							layout='intrinsic'
 						/>
 					</a>
 					<a
