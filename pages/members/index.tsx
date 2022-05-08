@@ -1,50 +1,52 @@
-import React from 'react';
-import { useState } from 'react';
+import React from "react";
+import { useState } from "react";
 
-import MemberList from '../../components/MemberList';
-
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 interface MemberType {
 	name: string;
 	graduationYear: number;
-	team: 'FTC' | 'FRC' | 'VEX' | 'leadership';
 }
 
-let members: MemberType[] = [
+let a: MemberType[] = [
 	{
-		name: 'Doer He',
+		name: "Doer He",
 		graduationYear: 2024,
-		team: 'leadership',
 	},
 	{
-		name: 'Sameer Godbole',
+		name: "Sameer Godbole",
 		graduationYear: 2023,
-		team: 'leadership',
 	},
 	{
-		name: 'Shaan Keole',
+		name: "Shaan Keole",
 		graduationYear: 2024,
-		team: 'FTC',
 	},
 ];
 
 const Members = () => {
 	let [year, setYear] = useState(0);
+	let [members, setMembers] = useState(a)
+
+	let memberYears: number[] = [];
+
+	members.forEach((member) => {
+		if (memberYears.includes(member.graduationYear)) {
+		} else {
+			memberYears.push(member.graduationYear);
+		}
+	});
 
 	return (
-		<div className='bg-gray-50'>
+		<div className="bg-gray-50">
 			<Header currentPage="members" />
 
-			<div className='bg-gray-50 text-white my-2 self-center text-center text-2xl' style={{fontFamily: "Times New Roman"}}>
-				{members.map((member) => {
-					return (
-						<MemberButton
-							setYear={setYear}
-							year={member.graduationYear}
-						/>
-					);
+			<div
+				className="my-2 self-center bg-gray-50 text-center text-2xl text-white"
+				style={{ fontFamily: "Times New Roman" }}
+			>
+				{memberYears.map((memberYear, index) => {
+					return <MemberButton setYear={setYear} year={memberYear} key={index} />;
 				})}
 
 				<MemberButton setYear={setYear} year={0} />
@@ -59,7 +61,7 @@ const Members = () => {
 					}
 				})
 				.map((members, index) => {
-					return <MemberList member={members} />;
+					return <MemberList member={members} key={index} />;
 				})}
 
 			<Footer />
@@ -72,10 +74,11 @@ const MemberButton = (props: {
 	setYear: React.Dispatch<React.SetStateAction<number>>;
 }): JSX.Element => {
 	let b = props.year === 0;
-	let a: 'All' | number = b ? 'All' : props.year;
+	let a: "All" | number = b ? "All" : props.year;
 
 	return (
-		<button className='outline-2 outline-black text-red-500 mx-4'
+		<button
+			className="mx-4 text-red-500 outline-2 outline-black"
 			onClick={() => {
 				props.setYear(props.year);
 			}}
@@ -83,6 +86,14 @@ const MemberButton = (props: {
 			{a}
 		</button>
 	);
+};
+
+interface MemberProps {
+	member: MemberType;
+}
+
+const MemberList = (props: MemberProps) => {
+	return <div className="bg-gray-50">{props.member.name}</div>;
 };
 
 export default Members;

@@ -21,7 +21,7 @@ const Brophy: NextPage = () => {
 				</div>
 
 				<div className="mt-4 text-center text-2xl font-bold text-white">
-					Brophy's Technology Mission Statement
+					Brophy&apos;s Technology Mission Statement
 				</div>
 				<div className="text-center text-lg text-white">
 					Brophy College Preparatory maintains an innovative one-to-one
