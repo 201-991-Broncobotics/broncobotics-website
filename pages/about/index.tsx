@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { NextPage } from 'next';
@@ -5,7 +6,7 @@ import Image from 'next/image';
 
 const About: NextPage = () => {
 	let imgFormatting =
-		'self-center object-center h-36 w-1/2 m-auto object-cover my-2 bg-white';
+		'self-center object-center h-auto m-auto object-cover my-2 bg-white w-full';
 
 	return (
 		<div className="bg-gray-50">
@@ -29,7 +30,7 @@ const About: NextPage = () => {
 					competing in VEX, one in FTC, and one in FRC.
 				</p>
 				<div className="mt-4 flex justify-center text-justify">
-					<div className="mx-2 mr-6 flex-1 font-medium">
+					<div className="mx-2 mr-6 flex-1 font-medium ">
 						<img
 							src="https://upload.wikimedia.org/wikipedia/commons/3/38/Vex-Logo.jpg"
 							alt="VEX LOGO"
@@ -48,7 +49,7 @@ const About: NextPage = () => {
 							className={imgFormatting}
 						/>
 						FTC is a team for students who have more experience with
-						robotics. Because of FTC's unique use of both kit parts and
+						robotics. Because of FTC&apos;s unique use of both kit parts and
 						custom parts, it is the perfect competition to prepare our
 						sophomores and juniors for FRC. Congrats to BroncoBotics FTC
 						team 201 who made it to states!
@@ -61,7 +62,7 @@ const About: NextPage = () => {
 						/>
 						FRC is the final level of BroncoBotics. FRC robots are made
 						almost exclusively out of custom made parts manufactured in
-						Brophy's Innovation Commons. FRC is made up of Juniors and
+						Brophy&apos;s Innovation Commons. FRC is made up of Juniors and
 						Seniors who have lots of experience from their past years in
 						robotics. Currently, Broncobotics has 1 FRC team, team 991.
 					</div>

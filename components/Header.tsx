@@ -41,8 +41,8 @@ function Header(props: HeaderProps) {
 	return (
 		<>
 			<Head>
-				<title>Broncobotics Website</title>
-				<meta name="description" content="BroncoBotics FTC team 201 FRC team 991" />
+				<title>BroncoBotics (WIP)</title>
+				<meta name="description" content="Brophy Robotics BroncoBotics FTC team 201 FRC team 991" />
 				<link rel="icon" href="/logo.svg" />
 			</Head>
 			<Navbar currentPage={props.currentPage} aboveImageText={a} />
