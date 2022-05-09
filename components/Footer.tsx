@@ -3,10 +3,13 @@ import yt_icon from "../public/yt_icon.png";
 import slack from "../public/slack.png";
 import Link from "next/link";
 
+interface FooterProps {
+	currentPage?: "Footer"
+}
 
-const Footer = () => {
+const Footer = (props: FooterProps) => {
 	return (
-		<footer className="bg-gray-50  p-4 sm:p-6">
+		<footer className={"bg-gray-50  p-4 sm:p-6 ".concat(props.currentPage=== "Footer" ? "-mt-10": "")}>
 			<div className="justify-between sm:flex sm:items-center">
 				<Link href={"/"} passHref> 
 					<a className="inline whitespace-nowrap">

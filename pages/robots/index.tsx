@@ -54,16 +54,14 @@ function Robots() {
 						alignment = 1;
 					}
 
-					let last: boolean = (index +1  === fullArray.length)
-
-               
+					let last: boolean = index + 1 === fullArray.length;
 
 					return (
 						<RobotsList
 							alignment={alignment}
 							robot={robot}
 							key={index}
-                     last={last}
+							last={last}
 						></RobotsList>
 					);
 				})}
@@ -89,9 +87,9 @@ export type RobotProps = { alignment: 0 | 1; robot: RobotType; last: boolean };
 function RobotsList(props: RobotProps) {
 	return (
 		<div
-			className={"mx-20 flex ".concat(
-				props.alignment === 0 ? "flex-row-reverse " : "flex-row "
-			).concat((props.last ? "  ": " mb-10 " ))}
+			className={"mx-20 flex "
+				.concat(props.alignment === 0 ? "flex-row-reverse " : "flex-row ")
+				.concat(props.last ? "  " : " mb-10 ")}
 		>
 			<Image
 				src={props.robot.robotImage}
@@ -99,9 +97,7 @@ function RobotsList(props: RobotProps) {
 				className={"h-72 w-96".concat("")}
 				objectFit={"cover"}
 			/>
-			<div className={"".concat(
-				props.alignment === 0 ? "mr-8 " : "ml-8 "
-			)}>
+			<div className={"".concat(props.alignment === 0 ? "mr-8 " : "ml-8 ")}>
 				<div className=" text-2xl text-white " style={{ fontFamily: "Serif" }}>
 					This is {props.robot.robotNameLong} ({props.robot.robotNameShort}
 					), used in the {props.robot.robotType} {props.robot.robotEndYear - 1}-

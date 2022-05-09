@@ -35,7 +35,7 @@ const Home: NextPage = () => {
 					className="m-auto "
 				></iframe>
 			</div>
-			<Footer />
+			<Footer currentPage='Footer'/>
 		</div>
 	);
 };
