@@ -10,7 +10,6 @@ interface NavbarProps {
 		| "robots"
 		| "brophy"
 		| "members";
-	aboveImageText: JSX.Element;
 }
 
 const Navbar = (props: NavbarProps) => {
@@ -77,7 +76,7 @@ const Navbar = (props: NavbarProps) => {
 								alt="BroncoBotics Logo"
 							/>
 							<span
-								className={homeClass}
+								className={homeClass.concat(" sm:text-xl")}
 								style={{ fontFamily: "DM Serif Text" }}
 							>
 								BroncoBotics
@@ -173,7 +172,42 @@ const Navbar = (props: NavbarProps) => {
 					</div>
 				</div>
 			</nav>
-			{props.aboveImageText}
+			<div className="bg-inherit">
+				<div
+					className="hidden text-center text-white md:block"
+					style={{
+						marginTop: "3rem",
+						fontFamily: "Martel",
+						fontSize: "7.5rem",
+					}}
+				>
+					BroncoBotics
+				</div>
+
+				<div
+					className="text-center text-white md:hidden"
+					style={{ fontFamily: "Martel", marginTop: "3rem", maxWidth: "100%", fontSize: "3.5rem" }}
+				>
+					BroncoBotics
+				</div>
+
+				<div
+					className="text-center text-white hidden md:block "
+					style={{
+						marginTop: "-.75rem",
+						fontFamily: "Martel",
+						fontSize: "3rem",
+					}}
+				>
+					Together to Create
+				</div>
+				<div
+					className="text-center text-white md:hidden"
+					style={{ fontFamily: "Martel", marginTop: "-.75rem", maxWidth: "100%", fontSize: "2.5rem" }}
+				>
+					Together to Create
+				</div>
+			</div>
 		</header>
 	);
 };
