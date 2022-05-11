@@ -61,8 +61,7 @@ function Robots() {
 							alignment={alignment}
 							robot={robot}
 							key={index}
-							last={last}
-						></RobotsList>
+							last={last}></RobotsList>
 					);
 				})}
 			</div>
@@ -89,8 +88,7 @@ function RobotsList(props: RobotProps) {
 		<div
 			className={"mx-20 flex "
 				.concat(props.alignment === 0 ? "flex-row-reverse " : "flex-row ")
-				.concat(props.last ? "  " : " mb-10 ")}
-		>
+				.concat(props.last ? "  " : " mb-10 ")}>
 			<Image
 				src={props.robot.robotImage}
 				alt={props.robot.robotNameShort}
@@ -105,8 +103,7 @@ function RobotsList(props: RobotProps) {
 				</div>
 				<div
 					className="mt-2 text-lg text-white"
-					style={{ fontFamily: "Serif" }}
-				>
+					style={{ fontFamily: "Serif" }}>
 					{" "}
 					{props.robot.robotDescription}
 				</div>

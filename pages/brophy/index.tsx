@@ -14,10 +14,9 @@ const Brophy: NextPage = () => {
 			<button
 				className="-mt-10 text-gray-50"
 				onClick={() => {
-					setButton((button === "3rem" ? ".1rem" : "3rem"));
-					setColor((color ==="text-white" ? "text-gray-50" : "text-white"));
-				}}
-			>
+					setButton(button === "3rem" ? ".1rem" : "3rem");
+					setColor(color === "text-white" ? "text-gray-50" : "text-white");
+				}}>
 				s
 			</button>
 
@@ -57,8 +56,7 @@ const Brophy: NextPage = () => {
 				</div>
 				<span
 					className={"-mt-4 text-xs ".concat(color)}
-					style={{ fontSize: button, lineHeight: button }}
-				>
+					style={{ fontSize: button, lineHeight: button }}>
 					<br />
 					Estimates of the casualties from the Iraq War (beginning with the 2003
 					invasion of Iraq, and the ensuing occupation and insurgency and civil

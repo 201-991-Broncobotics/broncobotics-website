@@ -2,6 +2,6 @@
   "tabWidth": 2,
   "useTabs": true,
   "arrowParens": "always",
-  "bracketSpacing": true
-  
+  "bracketSpacing": true,
+  "bracketSameLine": true
 }

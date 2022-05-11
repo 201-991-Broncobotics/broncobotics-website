@@ -15,12 +15,14 @@ interface MemberType {
 	graduationYear: number;
 }
 
-const Members = ({ members }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Members = ({
+	members,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	let [year, setYear] = useState(0);
 
 	let memberYears: number[] = [];
 
-	members = members.sort((a, b) => a.graduationYear- b.graduationYear)
+	members = members.sort((a, b) => a.graduationYear - b.graduationYear);
 
 	members.forEach((member) => {
 		if (memberYears.includes(member.graduationYear)) {
@@ -32,18 +34,24 @@ const Members = ({ members }: InferGetServerSidePropsType<typeof getServerSidePr
 	return (
 		<div className="bg-gray-50">
 			<Header currentPage="members" />
-			
-			<div
-				className="my-2 self-center bg-gray-50 text-center text-2xl text-white flex flex-row justify-center"
-				style={{ fontFamily: "Times New Roman" }}
-			>
-				{memberYears.sort((a, b) => a-b ).map((memberYear, index) => {
-					return (
-						<MemberButton setYear={setYear} year={memberYear} key={index} selected={year}/>
-					);
-				})}
 
-				<MemberButton setYear={setYear} year={0} selected={year}/>
+			<div
+				className="my-2 flex flex-row justify-center self-center bg-gray-50 text-center text-2xl text-white"
+				style={{ fontFamily: "Times New Roman" }}>
+				{memberYears
+					.sort((a, b) => a - b)
+					.map((memberYear, index) => {
+						return (
+							<MemberButton
+								setYear={setYear}
+								year={memberYear}
+								key={index}
+								selected={year}
+							/>
+						);
+					})}
+
+				<MemberButton setYear={setYear} year={0} selected={year} />
 			</div>
 
 			{members
@@ -66,18 +74,19 @@ const Members = ({ members }: InferGetServerSidePropsType<typeof getServerSidePr
 const MemberButton = (props: {
 	year: number;
 	setYear: React.Dispatch<React.SetStateAction<number>>;
-	selected: number; 
+	selected: number;
 }): JSX.Element => {
 	let b = props.year === 0;
 	let a: "All" | number = b ? "All" : props.year;
 
 	return (
 		<button
-			className={"mx-4 text-red-500 border border-white rounded-md w-[10%] ".concat((props.selected === props.year ? "bg-white" : "" ))}
+			className={"mx-4 w-[10%] rounded-md border border-white text-red-500 ".concat(
+				props.selected === props.year ? "bg-white" : ""
+			)}
 			onClick={() => {
 				props.setYear(props.year);
-			}}
-		>
+			}}>
 			{a}
 		</button>
 	);
@@ -92,7 +101,9 @@ const MemberList = (props: MemberListProps) => {
 };
 
 export const getServerSideProps = async () => {
-	const res = await fetch("http://localhost:3000/api/members/random?limit=43&years=5");
+	const res = await fetch(
+		"https://broncobotics.vercel.app/api/members/random?limit=43&years=15"
+	);
 	const members: MemberType[] = await res.json();
 
 	return {
