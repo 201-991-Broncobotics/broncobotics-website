@@ -10,6 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+
     strategy:
       matrix:
         node-version: [12.x, 14.x, 16.x]
@@ -25,7 +26,7 @@ jobs:
     - name: Installs Dependencies and Builds
       run: |
         npm install
-        npm run export
+        npm run build
         
     - name: Push
       uses: s0/git-publish-subdir-action@develop
