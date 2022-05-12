@@ -5,9 +5,9 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/yn9fGeZnrUnynDkWv9vmX/_buildManifest.js",
-    "static/yn9fGeZnrUnynDkWv9vmX/_ssgManifest.js",
-    "static/yn9fGeZnrUnynDkWv9vmX/_middlewareManifest.js"
+    "static/Ic4VBAIMV1u8IPQkr2VeF/_buildManifest.js",
+    "static/Ic4VBAIMV1u8IPQkr2VeF/_ssgManifest.js",
+    "static/Ic4VBAIMV1u8IPQkr2VeF/_middlewareManifest.js"
   ],
   "pages": {
     "/": [
@@ -22,7 +22,7 @@
       "static/chunks/webpack-69bfa6990bb9e155.js",
       "static/chunks/framework-5f4595e5518b5600.js",
       "static/chunks/main-81f4fb35f4507347.js",
-      "static/css/47ae19fd814c282d.css",
+      "static/css/f6668198f415838d.css",
       "static/chunks/pages/_app-43ac001d99fedbd3.js"
     ],
     "/_error": [
@@ -45,7 +45,7 @@
       "static/chunks/main-81f4fb35f4507347.js",
       "static/chunks/247-60ef849d51582e5a.js",
       "static/chunks/304-babc789086d76e03.js",
-      "static/chunks/pages/brophy-a33f90258ba9b1ad.js"
+      "static/chunks/pages/brophy-a37f43acc558ab3a.js"
     ],
     "/members": [
       "static/chunks/webpack-69bfa6990bb9e155.js",
