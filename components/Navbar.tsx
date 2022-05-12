@@ -11,22 +11,24 @@ interface NavbarProps {
 		| "brophy"
 		| "members";
 }
-const Navbar = (props: NavbarProps) => {	let defaulClassName = "block py-2 pl-2 text-base";
-let otherPage = " hover:text-gray-300 text-white";
-	let choosePage = " text-red-500 hover:text-[#d63838] ";	// console.log(choosePage + defaulClassName);
+const Navbar = (props: NavbarProps) => {
+	let defaulClassName = "block py-2 pl-2 text-base";
+	let otherPage = " hover:text-gray-300 text-white";
+	let choosePage = " text-red-500 hover:text-[#d63838] "; // console.log(choosePage + defaulClassName);
 	let aboutClass =
-	props.currentPage === "about"
+		props.currentPage === "about"
 			? choosePage + defaulClassName
 			: defaulClassName + otherPage;
-let competitionsClass =
+	let competitionsClass =
 		props.currentPage === "competitions"
-	? choosePage + defaulClassName
-		: defaulClassName + otherPage;
+			? choosePage + defaulClassName
+			: defaulClassName + otherPage;
 	let photosClass =
 		props.currentPage === "socials"
-		? choosePage + defaulClassName
-		: defaulClassName + otherPage;
-	let robotsClass =		props.currentPage === "robots"
+			? choosePage + defaulClassName
+			: defaulClassName + otherPage;
+	let robotsClass =
+		props.currentPage === "robots"
 			? choosePage + defaulClassName
 			: defaulClassName + otherPage;
 	let brophyClass =
@@ -51,30 +53,36 @@ let competitionsClass =
 			className="text-red-500 "
 			style={{
 				backgroundImage: `url(\"${headerBg.src}\")`,
-				height: "26rem",			width: "auto",
-				backgroundPosition: "center",			backgroundRepeat: "no-repeat",
+				height: "26rem",
+				width: "auto",
+				backgroundPosition: "center",
+				backgroundRepeat: "no-repeat",
 				backgroundSize: "cover",
 				position: "relative",
-			}}>			<nav className="bg-inherit px-1 py-2.5 sm:px-4">
+			}}>
+			{" "}
+			<nav className="bg-inherit px-1 py-2.5 sm:px-4">
 				<div className="container mx-auto flex flex-wrap items-center justify-between">
-				<Link href="/#" passHref>
+					<Link href="/#" passHref>
 						<a className="flex items-center">
 							{/* eslint-disable-next-line @next/next/no-img-element */}
-						<img						src="/logo.svg"
+							<img
+								src="/logo.svg"
 								className="mr-3 h-6 sm:h-10"
-							alt="BroncoBotics Logo"
-						/>
+								alt="BroncoBotics Logo"
+							/>
 							<span
 								className={homeClass.concat(" sm:text-2xl")}
-							style={{ fontFamily: "DM Serif Text" }}>
+								style={{ fontFamily: "DM Serif Text" }}>
 								BroncoBotics
-						</span>						</a>
-				</Link>
+							</span>{" "}
+						</a>
+					</Link>
 					<button
 						data-collapse-toggle="mobile-menu"
-			type="button"
+						type="button"
 						className="ml-3 inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"
-		aria-controls="mobile-menu-2"
+						aria-controls="mobile-menu-2"
 						aria-expanded="false">
 						<span className="sr-only">Open main menu</span>
 						<svg
