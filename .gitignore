@@ -25,6 +25,7 @@ dist-ssr
 
 # distribution stuff
 .next
+out 
 
 # python for making list of names
 name list.py

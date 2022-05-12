@@ -77,6 +77,9 @@ const Brophy: NextPage = () => {
 					(Associated Press). The Iraq Body Count project documents
 					185,000–208,000 violent civilian deaths through February 2020 in their
 					table. All estimates of Iraq War casualties are disputed.[4][5]
+
+						<a href="https://www.youtube.com/watch?v=xpNFINzNUqo" className="text-blue-500">only a spoonful.mov</a>
+
 				</span>
 			</div>
 

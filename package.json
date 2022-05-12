@@ -4,7 +4,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "buildExport": "next build && next export",
+    "export": "next build && next export",
     "lint": "next lint",
     "format": "prettier --write '**/*.{js,jsx,ts,tsx}' --config '.prettierrc'"
   },
