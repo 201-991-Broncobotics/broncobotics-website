@@ -2,14 +2,7 @@ import Navbar from "./Navbar";
 import Head from "next/head";
 
 interface HeaderProps {
-	currentPage:
-		| "about"
-		| "home"
-		| "competitions"
-		| "socials"
-		| "robots"
-		| "brophy"
-		| "members";
+	currentPage: "about" | "home" | "socials" | "robots" | "brophy" | "members";
 }
 
 function Header(props: HeaderProps) {

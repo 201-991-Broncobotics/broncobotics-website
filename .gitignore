@@ -27,5 +27,5 @@ dist-ssr
 .next
 out 
 
-# python for making list of names
-name list.py
+# python 
+*.py
