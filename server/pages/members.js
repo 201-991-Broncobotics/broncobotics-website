@@ -11,7 +11,7 @@ exports.modules = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   "getServerSideProps": () => (/* binding */ getServerSideProps)
+/* harmony export */   "getStaticProps": () => (/* binding */ getStaticProps)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
@@ -88,13 +88,23 @@ const MemberButton = (props)=>{
     });
 };
 const MemberList = (props)=>{
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "bg-gray-50",
-        children: props.member.name
+        children: [
+            props.member.name,
+            " graduated: ",
+            props.member.graduationYear,
+            ".",
+            " ",
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                href: "mailto:".concat(props.member.email),
+                children: "Email them here!"
+            })
+        ]
     });
 };
-const getServerSideProps = async ()=>{
-    const res = await fetch("https://broncobotics.vercel.app/api/members/random?limit=43&years=15");
+const getStaticProps = async ()=>{
+    const res = await fetch("https://broncobotics.vercel.app/api/members/random");
     const members = await res.json();
     return {
         props: {

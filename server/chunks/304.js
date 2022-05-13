@@ -161,6 +161,8 @@ __webpack_require__.d(__webpack_exports__, {
 
 // EXTERNAL MODULE: external "react/jsx-runtime"
 var jsx_runtime_ = __webpack_require__(997);
+// EXTERNAL MODULE: external "react"
+var external_react_ = __webpack_require__(6689);
 ;// CONCATENATED MODULE: ./public/header-bg-opacity.png
 /* harmony default export */ const header_bg_opacity = ({"src":"/_next/static/media/header-bg-opacity.96d77c0d.png","height":768,"width":2880,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAACCAIAAADq9gq6AAAAOElEQVR42g3JSQoAIAgAwH4VJCrZMRDc6v8/qblOC8v0IqBFoluFJeNU3mbq/3DgZGEg7BBeYfUAXKINzt463DEAAAAASUVORK5CYII="});
 // EXTERNAL MODULE: ./node_modules/next/link.js
@@ -170,17 +172,69 @@ var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
 
 
 
+
+
 const Navbar = (props)=>{
-    let defaulClassName = "block py-2 pl-2 text-base";
-    let otherPage = " hover:text-gray-300 text-white";
-    let choosePage = " text-red-500 hover:text-[#d63838] "; // console.log(choosePage + defaulClassName);
-    let aboutClass = props.currentPage === "about" ? choosePage + defaulClassName : defaulClassName + otherPage;
-    let competitionsClass = props.currentPage === "competitions" ? choosePage + defaulClassName : defaulClassName + otherPage;
-    let photosClass = props.currentPage === "socials" ? choosePage + defaulClassName : defaulClassName + otherPage;
-    let robotsClass = props.currentPage === "robots" ? choosePage + defaulClassName : defaulClassName + otherPage;
-    let brophyClass = props.currentPage === "brophy" ? choosePage + defaulClassName : defaulClassName + otherPage;
-    let membersClass = props.currentPage === "members" ? choosePage + defaulClassName : defaulClassName + otherPage;
-    let homeClass = props.currentPage === "home" ? "self-center md:text-xl font-semibold whitespace-nowrap -ml-2".concat(choosePage) : "self-center md:text-xl font-semibold whitespace-nowrap -ml-2".concat(otherPage);
+    let { 0: menuButton , 1: setMenuButton  } = (0,external_react_.useState)(true);
+    let a = [
+        {
+            url: "/about",
+            name: "About Broncobotics",
+            setMenuButton: setMenuButton,
+            currentPage: props.currentPage
+        },
+        {
+            url: "/members",
+            name: "Our Members",
+            setMenuButton: setMenuButton,
+            currentPage: props.currentPage
+        },
+        {
+            url: "/robots",
+            name: "Our Robots",
+            setMenuButton: setMenuButton,
+            currentPage: props.currentPage
+        },
+        {
+            url: "/socials",
+            name: "Social Media",
+            setMenuButton: setMenuButton,
+            currentPage: props.currentPage
+        },
+        {
+            url: "/brophy",
+            name: "About Our School",
+            setMenuButton: setMenuButton,
+            currentPage: props.currentPage
+        }, 
+    ];
+    let homeClass = props.currentPage === "home" ? "self-center md:text-xl font-semibold whitespace-nowrap -ml-2".concat(" text-red-500 hover:text-[#d63838] ") : "self-center md:text-xl font-semibold whitespace-nowrap -ml-2".concat(" hover:text-gray-300 text-white");
+    let menuSvg = /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
+        children: [
+            /*#__PURE__*/ jsx_runtime_.jsx("svg", {
+                className: "h-6 w-6",
+                fill: "currentColor",
+                viewBox: "0 0 20 20",
+                xmlns: "http://www.w3.org/2000/svg",
+                children: /*#__PURE__*/ jsx_runtime_.jsx("path", {
+                    fillRule: "evenodd",
+                    d: "M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
+                    clipRule: "evenodd"
+                })
+            }),
+            /*#__PURE__*/ jsx_runtime_.jsx("svg", {
+                className: "hidden h-6 w-6",
+                fill: "currentColor",
+                viewBox: "0 0 20 20",
+                xmlns: "http://www.w3.org/2000/svg",
+                children: /*#__PURE__*/ jsx_runtime_.jsx("path", {
+                    fillRule: "evenodd",
+                    d: "M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z",
+                    clipRule: "evenodd"
+                })
+            })
+        ]
+    });
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("header", {
         className: "text-red-500 ",
         style: {
@@ -193,7 +247,7 @@ const Navbar = (props)=>{
             position: "relative"
         },
         children: [
-            "   ",
+            " ",
             /*#__PURE__*/ jsx_runtime_.jsx("nav", {
                 className: "bg-inherit px-1 py-2.5 sm:px-4",
                 children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
@@ -204,6 +258,9 @@ const Navbar = (props)=>{
                             passHref: true,
                             children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("a", {
                                 className: "flex items-center",
+                                onClick: ()=>{
+                                    setMenuButton(false);
+                                },
                                 children: [
                                     /*#__PURE__*/ jsx_runtime_.jsx("img", {
                                         src: "/logo.svg",
@@ -211,13 +268,13 @@ const Navbar = (props)=>{
                                         alt: "BroncoBotics Logo"
                                     }),
                                     /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                                        className: homeClass.concat(" sm:text-2xl"),
+                                        className: homeClass.concat(" text-2xl"),
                                         style: {
                                             fontFamily: "DM Serif Text"
                                         },
                                         children: "BroncoBotics"
                                     }),
-                                    "      "
+                                    " "
                                 ]
                             })
                         }),
@@ -227,104 +284,35 @@ const Navbar = (props)=>{
                             className: "ml-3 inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden",
                             "aria-controls": "mobile-menu-2",
                             "aria-expanded": "false",
+                            onClick: ()=>{
+                                setMenuButton(!menuButton);
+                            },
                             children: [
                                 /*#__PURE__*/ jsx_runtime_.jsx("span", {
                                     className: "sr-only",
                                     children: "Open main menu"
                                 }),
-                                /*#__PURE__*/ jsx_runtime_.jsx("svg", {
-                                    className: "h-6 w-6",
-                                    fill: "currentColor",
-                                    viewBox: "0 0 20 20",
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    children: /*#__PURE__*/ jsx_runtime_.jsx("path", {
-                                        fillRule: "evenodd",
-                                        d: "M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z",
-                                        clipRule: "evenodd"
-                                    })
-                                }),
-                                /*#__PURE__*/ jsx_runtime_.jsx("svg", {
-                                    className: "hidden h-6 w-6",
-                                    fill: "currentColor",
-                                    viewBox: "0 0 20 20",
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    children: /*#__PURE__*/ jsx_runtime_.jsx("path", {
-                                        fillRule: "evenodd",
-                                        d: "M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z",
-                                        clipRule: "evenodd"
-                                    })
-                                })
+                                menuSvg
                             ]
                         }),
                         /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                            className: "hidden w-full md:block md:w-auto",
+                            className: " w-full md:block md:w-auto ".concat(menuButton ? " hidden" : " block"),
                             id: "mobile-menu",
                             children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("ul", {
-                                className: "mt-4 flex flex-col font-semibold md:mt-0 md:flex-row md:space-x-4 md:text-sm md:font-medium",
+                                className: "relative left-[50%] mt-4 -mr-2 flex w-[50%] flex-col bg-gray-600/70 object-right text-right font-semibold md:left-0 md:mt-0 md:w-full md:flex-row md:space-x-4 md:bg-inherit md:text-sm md:font-medium ",
                                 children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx("li", {
-                                        children: /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                                            passHref: true,
-                                            href: "/about",
-                                            children: /*#__PURE__*/ jsx_runtime_.jsx("a", {
-                                                className: aboutClass,
-                                                style: {
-                                                    fontFamily: "DM Serif Text"
-                                                },
-                                                children: "About Broncobotics"
-                                            })
-                                        })
+                                    /*#__PURE__*/ jsx_runtime_.jsx(NavButton, {
+                                        url: "/",
+                                        home: true,
+                                        name: "Home",
+                                        setMenuButton: setMenuButton,
+                                        currentPage: props.currentPage
                                     }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("li", {
-                                        children: /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                                            href: "/members",
-                                            passHref: true,
-                                            children: /*#__PURE__*/ jsx_runtime_.jsx("a", {
-                                                className: membersClass,
-                                                style: {
-                                                    fontFamily: "DM Serif Text"
-                                                },
-                                                children: "Our Members"
-                                            })
-                                        })
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("li", {
-                                        children: /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                                            href: "/robots",
-                                            passHref: true,
-                                            children: /*#__PURE__*/ jsx_runtime_.jsx("a", {
-                                                className: robotsClass,
-                                                style: {
-                                                    fontFamily: "DM Serif Text"
-                                                },
-                                                children: "Our Robots"
-                                            })
-                                        })
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("li", {
-                                        children: /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                                            href: "/socials",
-                                            passHref: true,
-                                            children: /*#__PURE__*/ jsx_runtime_.jsx("a", {
-                                                className: photosClass,
-                                                style: {
-                                                    fontFamily: "DM Serif Text"
-                                                },
-                                                children: "Social Media"
-                                            })
-                                        })
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("li", {
-                                        children: /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                                            href: "/brophy",
-                                            children: /*#__PURE__*/ jsx_runtime_.jsx("a", {
-                                                className: brophyClass,
-                                                style: {
-                                                    fontFamily: "DM Serif Text"
-                                                },
-                                                children: "About Our School"
-                                            })
-                                        })
+                                    a.map((b, index)=>{
+                                        return /*#__PURE__*/ (0,external_react_.createElement)(NavButton, {
+                                            ...b,
+                                            key: index
+                                        });
                                     })
                                 ]
                             })
@@ -345,7 +333,7 @@ const Navbar = (props)=>{
                         children: "BroncoBotics"
                     }),
                     /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "text-center text-white md:hidden",
+                        className: "text-center text-white md:hidden ".concat(menuButton ? " block" : " hidden"),
                         style: {
                             fontFamily: "Martel",
                             marginTop: "3rem",
@@ -364,7 +352,7 @@ const Navbar = (props)=>{
                         children: "Together to Create"
                     }),
                     /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "text-center text-white md:hidden",
+                        className: "text-center text-white md:hidden ".concat(menuButton ? " block" : " hidden"),
                         style: {
                             fontFamily: "Martel",
                             marginTop: "-.75rem",
@@ -376,6 +364,32 @@ const Navbar = (props)=>{
                 ]
             })
         ]
+    });
+};
+let NavButton = (props)=>{
+    let defaulClassName = " block py-2 pl-2 text-base  whitespace-nowrap ";
+    let otherPage = " hover:text-gray-300 text-white ";
+    let choosePage = " text-red-500 hover:text-[#d63838] ";
+    let a;
+    if (!props.home) {
+        a = props.currentPage === props.url.substring(1) ? choosePage + defaulClassName : defaulClassName + otherPage;
+    } else {
+        a = props.currentPage === "home" ? choosePage + defaulClassName + " md:hidden" : defaulClassName + otherPage + " md:hidden";
+    }
+    return /*#__PURE__*/ jsx_runtime_.jsx("li", {
+        children: /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+            href: props.url,
+            children: /*#__PURE__*/ jsx_runtime_.jsx("a", {
+                className: a,
+                style: {
+                    fontFamily: "DM Serif Text"
+                },
+                onClick: ()=>{
+                    props.setMenuButton(true);
+                },
+                children: props.name
+            })
+        })
     });
 };
 /* harmony default export */ const components_Navbar = (Navbar);

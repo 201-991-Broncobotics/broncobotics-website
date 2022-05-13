@@ -5,6 +5,7 @@
   "/about": "pages/about.html",
   "/api/hello": "pages/api/hello.js",
   "/api/members/random": "pages/api/members/random.js",
+  "/api/members/real": "pages/api/members/real.js",
   "/brophy": "pages/brophy.html",
   "/": "pages/index.html",
   "/members": "pages/members.js",

@@ -31,11 +31,20 @@ function handler(req, res) {
     for(let i = 0; i < years; i++){
         b.push(Math.floor(Math.random() * 124) + 1900);
     }
+    let firstName;
+    let lastName;
+    let graduationYear;
+    let c;
     for(let i1 = 0; i1 < limit; i1++){
-        a.push({
-            name: `${firstNames_namespaceObject[Math.floor(Math.random() * firstNames_namespaceObject.length)]} ${lastNames_namespaceObject[Math.floor(Math.random() * lastNames_namespaceObject.length)]}`,
-            graduationYear: b[Math.floor(Math.random() * b.length)]
-        });
+        firstName = firstNames_namespaceObject[Math.floor(Math.random() * firstNames_namespaceObject.length)];
+        lastName = lastNames_namespaceObject[Math.floor(Math.random() * lastNames_namespaceObject.length)];
+        graduationYear = b[Math.floor(Math.random() * b.length)];
+        c = {
+            name: `${firstName} ${lastName}`,
+            graduationYear: graduationYear,
+            email: `${firstName.substring(0, 1)}${lastName}${String(graduationYear).substring(2, 4)}@brophybroncos.org`.toLowerCase()
+        };
+        a.push(c);
     }
     res.send(a);
 };
