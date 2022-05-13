@@ -4,20 +4,20 @@ import { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
-import type {
-	NextPage,
-	GetServerSideProps,
-	InferGetServerSidePropsType,
-} from "next";
+import type { InferGetStaticPropsType } from "next";
+
 
 interface MemberType {
 	name: string;
 	graduationYear: number;
+	email: string;
 }
+
+
 
 const Members = ({
 	members,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
 	let [year, setYear] = useState(0);
 
 	let memberYears: number[] = [];
@@ -97,12 +97,17 @@ interface MemberListProps {
 }
 
 const MemberList = (props: MemberListProps) => {
-	return <div className="bg-gray-50">{props.member.name}</div>;
+	return (
+		<div className="bg-gray-50">
+			{props.member.name} graduated: {props.member.graduationYear}.{" "}
+			<a href={"mailto:".concat(props.member.email)}>Email them here!</a>
+		</div>
+	);
 };
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
 	const res = await fetch(
-		"https://broncobotics.vercel.app/api/members/random?limit=43&years=15"
+		"https://broncobotics.vercel.app/api/members/random"
 	);
 	const members: MemberType[] = await res.json();
 
