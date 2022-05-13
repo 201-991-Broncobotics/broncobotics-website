@@ -6,14 +6,11 @@ import Footer from "../../components/Footer";
 
 import type { InferGetStaticPropsType } from "next";
 
-
 interface MemberType {
 	name: string;
 	graduationYear: number;
 	email: string;
 }
-
-
 
 const Members = ({
 	members,
@@ -106,9 +103,7 @@ const MemberList = (props: MemberListProps) => {
 };
 
 export const getStaticProps = async () => {
-	const res = await fetch(
-		"https://broncobotics.vercel.app/api/members/random"
-	);
+	const res = await fetch("https://broncobotics.vercel.app/api/members/random");
 	const members: MemberType[] = await res.json();
 
 	return {

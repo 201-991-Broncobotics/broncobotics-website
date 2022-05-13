@@ -18,7 +18,7 @@ const Socials = () => {
 			link: "https://www.google.com/url?q=https%3A%2F%2Ftwitter.com%2Fbroncobotics%3Flang%3Den&sa=D&sntz=1&usg=AOvVaw0klHfH1f4Sn2HGAagCdNcp",
 			name: "Twitter",
 		},
-		// to add a new social media, just add a new link and name. it will add to the /socials page on the website. 
+		// to add a new social media, just add a new link and name. it will add to the /socials page on the website.
 	];
 	return (
 		<div className="" style={{ backgroundColor: "rgb(109,110,113)" }}>
