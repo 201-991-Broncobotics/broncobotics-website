@@ -16,10 +16,15 @@ const Members = ({
 	members,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	let [year, setYear] = useState(0);
+	let [search, setSearch] = useState("")
 
 	let memberYears: number[] = [];
 
+	
+
 	members = members.sort((a, b) => a.graduationYear - b.graduationYear);
+
+	let filteredMembers: MemberType[];
 
 	members.forEach((member) => {
 		if (memberYears.includes(member.graduationYear)) {
@@ -32,34 +37,22 @@ const Members = ({
 		<div className="bg-gray-50">
 			<Header currentPage="members" />
 
+			<div className=" text-center text-4xl font-bold text-white" style={{fontFamily: "Roboto Slab"}}>
+				Search for Current and Former Broncobotics Members
+				</div>
 			<div
 				className="my-2 flex flex-row justify-center self-center bg-gray-50 text-center text-2xl text-white"
 				style={{ fontFamily: "Times New Roman" }}
 			>
-				{memberYears
-					.sort((a, b) => a - b)
-					.map((memberYear, index) => {
-						return (
-							<MemberButton
-								setYear={setYear}
-								year={memberYear}
-								key={index}
-								selected={year}
-							/>
-						);
-					})}
+			
+				<input type="text"  className="text-gray-50 w-[30%]" value={search} onChange={(e) => setSearch(e.target.value)} />
 
-				<MemberButton setYear={setYear} year={0} selected={year} />
 			</div>
 			<div className="text-center ">
 				<ul className="  m-auto w-[20%] outline-white ">
 					{members
 						.filter((member) => {
-							if (year === 0) {
-								return member.graduationYear > 0;
-							} else {
-								return member.graduationYear === year;
-							}
+							return member.name.toLowerCase().includes(search.toLowerCase())
 						})
 						.map((members, index) => {
 							return <MemberList member={members} key={index} />;
@@ -68,28 +61,6 @@ const Members = ({
 			</div>
 			<Footer />
 		</div>
-	);
-};
-
-const MemberButton = (props: {
-	year: number;
-	setYear: React.Dispatch<React.SetStateAction<number>>;
-	selected: number;
-}): JSX.Element => {
-	let b = props.year === 0;
-	let a: "All" | number = b ? "All" : props.year;
-
-	return (
-		<button
-			className={"mx-4 w-[10%] rounded-md border border-white text-red-500 ".concat(
-				props.selected === props.year ? "bg-white" : ""
-			)}
-			onClick={() => {
-				props.setYear(props.year);
-			}}
-		>
-			{a}
-		</button>
 	);
 };
 
