@@ -13,17 +13,20 @@ const Home: NextPage = () => {
 				className="bg-gray-50 text-gray-50 "
 				onClick={() => {
 					setEasterEgg(!easterEgg);
-				}}>
+				}}
+			>
 				s
 			</button>
 			<h2
 				className=" -mt-4 text-center text-4xl text-white"
-				style={{ fontFamily: "Times New Roman" }}>
+				style={{ fontFamily: "Times New Roman" }}
+			>
 				Mission Statement
 			</h2>
 			<div
 				className="mx-8 mt-2 text-center text-xl text-white"
-				style={{ fontFamily: "Times New Roman" }}>
+				style={{ fontFamily: "Times New Roman" }}
+			>
 				BroncoBotics brings Fun and Friendly to Robotics while helping fellow
 				students with Teamwork, Respect, Creativity, and Problem-Solving Skills
 				through Coding, Digital Design, and Engineering.{" "}
@@ -37,7 +40,8 @@ const Home: NextPage = () => {
 					height="700"
 					frameBorder="0"
 					scrolling="no"
-					className="m-auto "></iframe>
+					className="m-auto "
+				></iframe>
 			</div>
 			<Footer />
 		</div>

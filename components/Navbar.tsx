@@ -56,21 +56,25 @@ const Navbar = (props: NavbarProps) => {
 				className="h-6 w-6"
 				fill="currentColor"
 				viewBox="0 0 20 20"
-				xmlns="http://www.w3.org/2000/svg">
+				xmlns="http://www.w3.org/2000/svg"
+			>
 				<path
 					fillRule="evenodd"
 					d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-					clipRule="evenodd"></path>
+					clipRule="evenodd"
+				></path>
 			</svg>
 			<svg
 				className="hidden h-6 w-6"
 				fill="currentColor"
 				viewBox="0 0 20 20"
-				xmlns="http://www.w3.org/2000/svg">
+				xmlns="http://www.w3.org/2000/svg"
+			>
 				<path
 					fillRule="evenodd"
 					d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-					clipRule="evenodd"></path>
+					clipRule="evenodd"
+				></path>
 			</svg>
 		</>
 	);
@@ -86,7 +90,8 @@ const Navbar = (props: NavbarProps) => {
 				backgroundRepeat: "no-repeat",
 				backgroundSize: "cover",
 				position: "relative",
-			}}>
+			}}
+		>
 			{" "}
 			<nav className="bg-inherit px-1 py-2.5 sm:px-4">
 				<div className="container mx-auto flex flex-wrap items-center justify-between">
@@ -95,7 +100,8 @@ const Navbar = (props: NavbarProps) => {
 							className="flex items-center"
 							onClick={() => {
 								setMenuButton(false);
-							}}>
+							}}
+						>
 							{/* eslint-disable-next-line @next/next/no-img-element */}
 							<img
 								src="/logo.svg"
@@ -104,7 +110,8 @@ const Navbar = (props: NavbarProps) => {
 							/>
 							<span
 								className={homeClass.concat(" text-2xl")}
-								style={{ fontFamily: "DM Serif Text" }}>
+								style={{ fontFamily: "DM Serif Text" }}
+							>
 								BroncoBotics
 							</span>{" "}
 						</a>
@@ -117,7 +124,8 @@ const Navbar = (props: NavbarProps) => {
 						aria-expanded="false"
 						onClick={() => {
 							setMenuButton(!menuButton);
-						}}>
+						}}
+					>
 						<span className="sr-only">Open main menu</span>
 						{menuSvg}
 					</button>
@@ -125,7 +133,8 @@ const Navbar = (props: NavbarProps) => {
 						className={" w-full md:block md:w-auto ".concat(
 							menuButton ? " hidden" : " block"
 						)}
-						id="mobile-menu">
+						id="mobile-menu"
+					>
 						<ul className="relative left-[50%] mt-4 -mr-2 flex w-[50%] flex-col bg-gray-600/70 object-right text-right font-semibold md:left-0 md:mt-0 md:w-full md:flex-row md:space-x-4 md:bg-inherit md:text-sm md:font-medium ">
 							<NavButton
 								url={"/"}
@@ -148,7 +157,8 @@ const Navbar = (props: NavbarProps) => {
 						marginTop: "3rem",
 						fontFamily: "Martel",
 						fontSize: "7.5rem",
-					}}>
+					}}
+				>
 					BroncoBotics
 				</div>
 
@@ -161,7 +171,8 @@ const Navbar = (props: NavbarProps) => {
 						marginTop: "3rem",
 						maxWidth: "100%",
 						fontSize: "3.5rem",
-					}}>
+					}}
+				>
 					BroncoBotics
 				</div>
 
@@ -171,7 +182,8 @@ const Navbar = (props: NavbarProps) => {
 						marginTop: "-.75rem",
 						fontFamily: "Martel",
 						fontSize: "3rem",
-					}}>
+					}}
+				>
 					Together to Create
 				</div>
 				<div
@@ -183,7 +195,8 @@ const Navbar = (props: NavbarProps) => {
 						marginTop: "-.75rem",
 						maxWidth: "100%",
 						fontSize: "2.5rem",
-					}}>
+					}}
+				>
 					Together to Create
 				</div>
 			</div>
@@ -223,7 +236,8 @@ let NavButton = (props: NavButtonProps): JSX.Element => {
 					style={{ fontFamily: "DM Serif Text" }}
 					onClick={() => {
 						props.setMenuButton(true);
-					}}>
+					}}
+				>
 					{props.name}
 				</a>
 			</Link>

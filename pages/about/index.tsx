@@ -13,12 +13,14 @@ const About: NextPage = () => {
 			<Header currentPage="about" />
 			<div
 				className="mx-4 mt-6 px-4 text-center text-white"
-				style={{ fontFamily: "Open Sans" }}>
+				style={{ fontFamily: "Open Sans" }}
+			>
 				<p className="font-mono text-lg font-semibold">
 					BroncoBotics is the robotics club of{" "}
 					<a
 						href="https://www.brophyprep.org/"
-						className="text-blue-400 underline hover:text-blue-300 hover:no-underline hover:opacity-90 ">
+						className="text-blue-400 underline hover:text-blue-300 hover:no-underline hover:opacity-90 "
+					>
 						Brophy College Preparatory
 					</a>
 					, a Private Jesuit High School located in Central Phoenix.

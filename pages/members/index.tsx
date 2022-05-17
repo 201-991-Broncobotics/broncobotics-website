@@ -34,7 +34,8 @@ const Members = ({
 
 			<div
 				className="my-2 flex flex-row justify-center self-center bg-gray-50 text-center text-2xl text-white"
-				style={{ fontFamily: "Times New Roman" }}>
+				style={{ fontFamily: "Times New Roman" }}
+			>
 				{memberYears
 					.sort((a, b) => a - b)
 					.map((memberYear, index) => {
@@ -50,19 +51,21 @@ const Members = ({
 
 				<MemberButton setYear={setYear} year={0} selected={year} />
 			</div>
-
-			{members
-				.filter((member) => {
-					if (year === 0) {
-						return member.graduationYear > 0;
-					} else {
-						return member.graduationYear === year;
-					}
-				})
-				.map((members, index) => {
-					return <MemberList member={members} key={index} />;
-				})}
-
+			<div className="text-center ">
+				<ul className="  m-auto w-[20%] outline-white ">
+					{members
+						.filter((member) => {
+							if (year === 0) {
+								return member.graduationYear > 0;
+							} else {
+								return member.graduationYear === year;
+							}
+						})
+						.map((members, index) => {
+							return <MemberList member={members} key={index} />;
+						})}
+				</ul>
+			</div>
 			<Footer />
 		</div>
 	);
@@ -83,7 +86,8 @@ const MemberButton = (props: {
 			)}
 			onClick={() => {
 				props.setYear(props.year);
-			}}>
+			}}
+		>
 			{a}
 		</button>
 	);
@@ -95,15 +99,20 @@ interface MemberListProps {
 
 const MemberList = (props: MemberListProps) => {
 	return (
-		<div className="bg-gray-50">
-			{props.member.name} graduated: {props.member.graduationYear}.{" "}
-			<a href={"mailto:".concat(props.member.email)}>Email them here!</a>
-		</div>
+		<a href={"mailto:".concat(props.member.email)}>
+			<li
+				className="my-2 w-full bg-gray-50 text-2xl text-white  outline outline-1 outline-black   "
+				style={{ fontFamily: "Martel", listStyle: "none" }}
+			>
+				{props.member.name} {"'"}
+				{String(props.member.graduationYear).substring(2, 4)}.
+			</li>
+		</a>
 	);
 };
 
 export const getStaticProps = async () => {
-	const res = await fetch("https://broncobotics.vercel.app/api/members/random");
+	const res = await fetch("https://broncobotics.vercel.app/api/members/real");
 	const members: MemberType[] = await res.json();
 
 	return {

@@ -25,7 +25,8 @@ const Socials = () => {
 			<Header currentPage="socials" />
 			<div
 				className="m-auto my-4 text-center text-5xl text-white "
-				style={{ fontFamily: "Roboto Slab" }}>
+				style={{ fontFamily: "Roboto Slab" }}
+			>
 				Follow us on Social Media!
 			</div>
 			<AllSocials a={a} />
@@ -65,7 +66,8 @@ let SocialButton = (props: SocialButtonProps): JSX.Element => {
 				className={
 					"my-2 w-auto rounded-xl border-2 bg-red-500  hover:border-red-500 hover:bg-white hover:text-black"
 				}
-				style={{ fontFamily: "Roboto Slab" }}>
+				style={{ fontFamily: "Roboto Slab" }}
+			>
 				{props.name}
 			</li>
 		</a>

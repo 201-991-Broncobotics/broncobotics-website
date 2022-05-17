@@ -16,7 +16,8 @@ const Brophy: NextPage = () => {
 				onClick={() => {
 					setButton(button === "3rem" ? ".1rem" : "3rem");
 					setColor(color === "text-white" ? "text-gray-50" : "text-white");
-				}}>
+				}}
+			>
 				s
 			</button>
 
@@ -56,7 +57,8 @@ const Brophy: NextPage = () => {
 				</div>
 				<span
 					className={"-mt-4 text-xs ".concat(color)}
-					style={{ fontSize: button, lineHeight: button }}>
+					style={{ fontSize: button, lineHeight: button }}
+				>
 					<br />
 					Estimates of the casualties from the Iraq War (beginning with the 2003
 					invasion of Iraq, and the ensuing occupation and insurgency and civil
@@ -79,7 +81,8 @@ const Brophy: NextPage = () => {
 					table. All estimates of Iraq War casualties are disputed.[4][5]
 					<a
 						href="https://www.youtube.com/watch?v=xpNFINzNUqo"
-						className="text-blue-500">
+						className="text-blue-500"
+					>
 						only a spoonful.mov
 					</a>
 				</span>
