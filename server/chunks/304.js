@@ -18,9 +18,9 @@ var jsx_runtime_ = __webpack_require__(997);
 var next_image = __webpack_require__(5675);
 var image_default = /*#__PURE__*/__webpack_require__.n(next_image);
 ;// CONCATENATED MODULE: ./public/yt_icon.png
-/* harmony default export */ const yt_icon = ({"src":"/_next/static/media/yt_icon.f1f1068c.png","height":518,"width":518,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAAAAADhZOFXAAAANElEQVR42mOIcjY31TZxiWLgV+Zl0NOTFWQwYMhZwMBgoMlgyFD7/1kjgx6cAZdCKIZpBwAn6g9NO9IMFQAAAABJRU5ErkJggg=="});
+/* harmony default export */ const yt_icon = ({"src":"/_next/static/media/yt_icon.f1f1068c.png","height":518,"width":518,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAMAAADz0U65AAAAIVBMVEUpKSkgICAmJiZEREQtLS1aWlpzc3M0NDT7+/ve3t7Nzc2dwDDLAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAM0lEQVQImSWKSQ7AQAzCDGTW/z94lPaAsDBkFdQKsgVfMiUAZd/hH87oSZn9wFjuqtZQDxYDAIuAIpOVAAAAAElFTkSuQmCC"});
 ;// CONCATENATED MODULE: ./public/slack.png
-/* harmony default export */ const slack = ({"src":"/_next/static/media/slack.d3750360.png","height":1600,"width":1600,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAATUlEQVR42g3IIREAIRAAwBX0/QIEQKFoQAUSoLH4M9fjmXVLwTYNCwVouiOBJYXqCs1mOK7vqbrJ1FUvXMdga8JVhbSAdHQNKFiGaaP8ilAgYay30LMAAAAASUVORK5CYII="});
+/* harmony default export */ const slack = ({"src":"/_next/static/media/slack.d3750360.png","height":1600,"width":1600,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAMAAADz0U65AAAAFVBMVEUAAABMaXEAAAAAAAAAAAAAAAAAAADXKPiVAAAAB3RSTlOKAKvczplwecAMZwAAAAlwSFlzAAALEwAACxMBAJqcGAAAADBJREFUCJkVy8EBwEAIwzCbBPYf+Vr9hc4yikKjTELDQHsHy8JdC0NKMmjKX3TYrz8S2ACFryD/WAAAAABJRU5ErkJggg=="});
 // EXTERNAL MODULE: ./node_modules/next/link.js
 var next_link = __webpack_require__(1664);
 var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
@@ -164,7 +164,7 @@ var jsx_runtime_ = __webpack_require__(997);
 // EXTERNAL MODULE: external "react"
 var external_react_ = __webpack_require__(6689);
 ;// CONCATENATED MODULE: ./public/header-bg-opacity.png
-/* harmony default export */ const header_bg_opacity = ({"src":"/_next/static/media/header-bg-opacity.96d77c0d.png","height":768,"width":2880,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAACCAIAAADq9gq6AAAAOElEQVR42g3JSQoAIAgAwH4VJCrZMRDc6v8/qblOC8v0IqBFoluFJeNU3mbq/3DgZGEg7BBeYfUAXKINzt463DEAAAAASUVORK5CYII="});
+/* harmony default export */ const header_bg_opacity = ({"src":"/_next/static/media/header-bg-opacity.96d77c0d.png","height":768,"width":2880,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAACCAMAAABSSm3fAAAAD1BMVEVkX2NIQUVKRUlRTVFRSE2uMSNDAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAF0lEQVQImWNgYGBiYWBhAAFGRkYmBgYAAK0AEJndlggAAAAASUVORK5CYII="});
 // EXTERNAL MODULE: ./node_modules/next/link.js
 var next_link = __webpack_require__(1664);
 var link_default = /*#__PURE__*/__webpack_require__.n(next_link);

@@ -61,16 +61,22 @@ const Members = ({ members: members1  })=>{
                     })
                 ]
             }),
-            members1.filter((member)=>{
-                if (year === 0) {
-                    return member.graduationYear > 0;
-                } else {
-                    return member.graduationYear === year;
-                }
-            }).map((members, index)=>{
-                return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(MemberList, {
-                    member: members
-                }, index);
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                className: "text-center ",
+                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("ul", {
+                    className: " m-auto w-[20%] outline-white ",
+                    children: members1.filter((member)=>{
+                        if (year === 0) {
+                            return member.graduationYear > 0;
+                        } else {
+                            return member.graduationYear === year;
+                        }
+                    }).map((members, index)=>{
+                        return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(MemberList, {
+                            member: members
+                        }, index);
+                    })
+                })
             }),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Footer__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {})
         ]
@@ -88,23 +94,26 @@ const MemberButton = (props)=>{
     });
 };
 const MemberList = (props)=>{
-    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: "bg-gray-50",
-        children: [
-            props.member.name,
-            " graduated: ",
-            props.member.graduationYear,
-            ".",
-            " ",
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                href: "mailto:".concat(props.member.email),
-                children: "Email them here!"
-            })
-        ]
+    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+        href: "mailto:".concat(props.member.email),
+        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", {
+            className: "my-2 w-full bg-gray-50 text-2xl text-white outline outline-1 outline-black ",
+            style: {
+                fontFamily: "Martel",
+                listStyle: "none"
+            },
+            children: [
+                props.member.name,
+                " ",
+                "'",
+                String(props.member.graduationYear).substring(2, 4),
+                "."
+            ]
+        })
     });
 };
 const getStaticProps = async ()=>{
-    const res = await fetch("https://broncobotics.vercel.app/api/members/random");
+    const res = await fetch("https://broncobotics.vercel.app/api/members/real");
     const members = await res.json();
     return {
         props: {
