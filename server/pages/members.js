@@ -26,9 +26,11 @@ __webpack_require__.r(__webpack_exports__);
 
 const Members = ({ members: members1  })=>{
     let { 0: year , 1: setYear  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+    let { 0: search , 1: setSearch  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
     let memberYears = [];
     members1 = members1.sort((a, b)=>a.graduationYear - b.graduationYear
     );
+    let filteredMembers;
     members1.forEach((member)=>{
         if (memberYears.includes(member.graduationYear)) {} else {
             memberYears.push(member.graduationYear);
@@ -40,37 +42,31 @@ const Members = ({ members: members1  })=>{
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Header__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z, {
                 currentPage: "members"
             }),
-            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                className: " text-center text-4xl font-bold text-white",
+                style: {
+                    fontFamily: "Roboto Slab"
+                },
+                children: "Search for Current and Former Broncobotics Members"
+            }),
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                 className: "my-2 flex flex-row justify-center self-center bg-gray-50 text-center text-2xl text-white",
                 style: {
                     fontFamily: "Times New Roman"
                 },
-                children: [
-                    memberYears.sort((a, b)=>a - b
-                    ).map((memberYear, index)=>{
-                        return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(MemberButton, {
-                            setYear: setYear,
-                            year: memberYear,
-                            selected: year
-                        }, index);
-                    }),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(MemberButton, {
-                        setYear: setYear,
-                        year: 0,
-                        selected: year
-                    })
-                ]
+                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                    type: "text",
+                    className: "text-gray-50 w-[30%]",
+                    value: search,
+                    onChange: (e)=>setSearch(e.target.value)
+                })
             }),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                 className: "text-center ",
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("ul", {
                     className: " m-auto w-[20%] outline-white ",
                     children: members1.filter((member)=>{
-                        if (year === 0) {
-                            return member.graduationYear > 0;
-                        } else {
-                            return member.graduationYear === year;
-                        }
+                        return member.name.toLowerCase().includes(search.toLowerCase());
                     }).map((members, index)=>{
                         return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(MemberList, {
                             member: members
@@ -80,17 +76,6 @@ const Members = ({ members: members1  })=>{
             }),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Footer__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {})
         ]
-    });
-};
-const MemberButton = (props)=>{
-    let b = props.year === 0;
-    let a = b ? "All" : props.year;
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-        className: "mx-4 w-[10%] rounded-md border border-white text-red-500 ".concat(props.selected === props.year ? "bg-white" : ""),
-        onClick: ()=>{
-            props.setYear(props.year);
-        },
-        children: a
     });
 };
 const MemberList = (props)=>{
