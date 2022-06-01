@@ -1,6 +1,6 @@
 {
-  "tabWidth": 2,
-  "useTabs": true,
-  "arrowParens": "always",
-  "bracketSpacing": true
+	"useTabs": false,
+	"arrowParens": "always",
+	"bracketSpacing": true,
+  "tabWidth": 3
 }
