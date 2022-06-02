@@ -4,9 +4,9 @@ import type { MemberType } from "../../members/index";
 import realNames from "../../../public/realNames.json";
 
 export default function handler(
-	req: NextApiRequest,
-	res: NextApiResponse<MemberType[]>
+   req: NextApiRequest,
+   res: NextApiResponse<MemberType[]>
 ) {
-	let a: MemberType[] = realNames;
-	res.send(a);
+   let a: MemberType[] = realNames;
+   res.send(a);
 }

@@ -5,114 +5,120 @@ import PlaceholderImage from "../../public/robot.png";
 import type { StaticImageData } from "next/image";
 import Image from "next/image";
 
+let lorem80 = `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda nostrum ducimus quo tempora rerum. Iure fugiat enim qui quae! Beatae, consequuntur. Neque accusantium excepturi itaque, saepe deserunt, odio autem consequuntur necessitatibus placeat modi nobis dolore aliquam. Reprehenderit sapiente quia pariatur fuga autem a eveniet eos commodi voluptate laboriosam inventore doloribus reiciendis placeat sequi quae eligendi ducimus asperiores aliquid, distinctio fugiat tempora? Provident nobis odit in repellendus consequatur nulla unde non voluptatum veritatis vitae, suscipit temporibus, tempora perspiciatis. Tempore culpa qui nisi?`;
 let robotConfig: RobotType[] = [
-	{
-		robotImage: PlaceholderImage,
-		robotNameShort: "BS9K",
-		robotNameLong: "Ball Shooter 9000",
-		robotType: "FTC",
-		robotEndYear: 2022,
-		robotTeamNumber: "201",
-		robotDescription:
-			"lorem ipsum id volutpat lacus laoreet non curabitur gravida arcu ac tortor dignissim convallis aenean et tortor at risus viverra adipiscing at in tellus integer feugiat scelerisque varius morbi enim nunc faucibus a pellentesque sit amet porttitor eget dolor morbi non arcu risus quis varius quam quisque id diam vel quam ",
-		seasonName: "Freight Frenzy",
-	},
-	{
-		robotImage: PlaceholderImage,
-		robotNameShort: "DIRT",
-		robotNameLong: "Da Interesting Robot Thing",
-		robotType: "FRC",
-		robotEndYear: 2022,
-		robotTeamNumber: "991",
-		robotDescription:
-			"lorem ipsum id volutpat lacus laoreet non curabitur gravida arcu ac tortor dignissim convallis aenean et tortor at risus viverra adipiscing at in tellus integer feugiat scelerisque varius morbi enim nunc faucibus a pellentesque sit amet porttitor eget dolor morbi non arcu risus quis varius quam quisque id diam vel quam",
-		seasonName: "Rapid React",
-	},
-	{
-		robotImage: PlaceholderImage,
-		robotNameShort: "TARS",
-		robotNameLong: "T-Shirt Air Repellant System",
-		robotType: "FRC",
-		robotEndYear: 2022,
-		robotTeamNumber: "991",
-		robotDescription:
-			"lorem ipsum id volutpat lacus laoreet non curabitur gravida arcu ac tortor dignissim convallis aenean et tortor at risus viverra adipiscing at in tellus integer feugiat scelerisque varius morbi enim nunc faucibus a pellentesque sit amet porttitor eget dolor morbi non arcu risus quis varius quam quisque id diam vel quam",
-		seasonName: "Freight Frenzy",
-	},
+   {
+      robotImage: [PlaceholderImage],
+      robotImageAlt: ["Robot Image"],
+      robotType: "FTC",
+      robotEndYear: 2022,
+      descriptionText: lorem80,
+      titleText: `This is Ball Shooter 9000 `,
+      robotName: { long: "Ball Shooter 9000", short: "BS9K" },
+   },
+   {
+      robotImage: [PlaceholderImage],
+      robotImageAlt: ["Robot Image"],
+      robotType: "FTC",
+      robotEndYear: 2022,
+      descriptionText: lorem80,
+      titleText: `This is Ball Shooter 9000 `,
+      robotName: { long: "Ball Shooter 9000", short: "BS9K" },
+   },
+   {
+      robotImage: [PlaceholderImage],
+      robotImageAlt: ["Robot Image"],
+      robotType: "FTC",
+      robotEndYear: 2022,
+      descriptionText: lorem80,
+      titleText: `This is Ball Shooter 9000 `,
+      robotName: { long: "Ball Shooter 9000", short: "BS9K" },
+   },
 ];
-
 function Robots() {
-	return (
-		<>
-			<Header currentPage="robots" />
-			<div className="mt-8">
-				{robotConfig.map((robot, index, fullArray) => {
-					let alignment: 0 | 1;
-					if (index % 2 === 0) {
-						alignment = 0;
-					} else {
-						alignment = 1;
-					}
+   return (
+      <>
+         <Header currentPage="robots" />
+         <div className="mt-8">
+            {robotConfig.map((robot, index, fullArray) => {
+               let alignment: 0 | 1;
+               let last: boolean = index + 1 === fullArray.length;
+               if (index % 2 === 0) {
+                  alignment = 0;
+               } else {
+                  alignment = 1;
+               }
 
-					let last: boolean = index + 1 === fullArray.length;
-
-					return (
-						<RobotsList
-							alignment={alignment}
-							robot={robot}
-							key={index}
-							last={last}
-						></RobotsList>
-					);
-				})}
-			</div>
-			<Footer />
-		</>
-	);
+               return (
+                  <RobotsList
+                     key={index}
+                     alignment={alignment}
+                     last={last}
+                     robotImage={robot.robotImage}
+                     robotType={robot.robotType}
+                     robotEndYear={robot.robotEndYear}
+                     robotName={robot.robotName}
+                     robotImageAlt={robot.robotImageAlt}
+                     descriptionText={robot.descriptionText}
+                     titleText={robot.titleText}
+                  />
+               );
+            })}
+         </div>
+         <Footer />
+      </>
+   );
 }
 
 export interface RobotType {
-	robotImage: StaticImageData;
-	robotNameShort: string;
-	robotNameLong: string;
-	robotType: "VEX" | "FTC" | "FRC" | "other";
-	robotTeamNumber: "201A" | "201B" | "201" | "991" | "other";
-	robotEndYear: number;
-	robotDescription: string;
-	seasonName: string;
+   robotImage: StaticImageData[];
+   robotImageAlt: string[];
+   robotName: {
+      short: string;
+      long: string;
+   };
+   robotType: "VEX" | "FTC" | "FRC" | "other";
+   robotEndYear: number;
+   titleText: string;
+   descriptionText: string;
 }
 
-export type RobotProps = { alignment: 0 | 1; robot: RobotType; last: boolean };
+export interface RobotProps extends RobotType {
+   alignment: 0 | 1;
+   last: boolean;
+}
 
 function RobotsList(props: RobotProps) {
-	return (
-		<div
-			className={"mx-20 flex "
-				.concat(props.alignment === 0 ? "flex-row-reverse " : "flex-row ")
-				.concat(props.last ? "  " : " mb-10 ")}
-		>
-			<Image
-				src={props.robot.robotImage}
-				alt={props.robot.robotNameShort}
-				className={"h-72 w-96".concat("")}
-				objectFit={"cover"}
-			/>
-			<div className={"".concat(props.alignment === 0 ? "mr-8 " : "ml-8 ")}>
-				<div className=" text-2xl text-white " style={{ fontFamily: "Serif" }}>
-					This is {props.robot.robotNameLong} ({props.robot.robotNameShort}
-					), used in the {props.robot.robotType} {props.robot.robotEndYear - 1}-
-					{props.robot.robotEndYear} season, {props.robot.seasonName}!
-				</div>
-				<div
-					className="mt-2 text-lg text-white"
-					style={{ fontFamily: "Serif" }}
-				>
-					{" "}
-					{props.robot.robotDescription}
-				</div>
-			</div>
-		</div>
-	);
+   let a: StaticImageData[] = props.robotImage;
+   return (
+      <div
+         className={"mx-20 flex "
+            .concat(props.alignment === 0 ? "flex-row-reverse " : "flex-row ")
+            .concat(props.last ? "  " : " mb-10 ")}
+      >
+         <Image
+            src={props.robotImage[0]}
+            alt={props.robotImageAlt[0]}
+            className={"h-72 w-96".concat("")}
+            objectFit={"cover"}
+         />
+
+         <div className={"".concat(props.alignment === 0 ? "mr-8 " : "ml-8 ")}>
+            <div
+               className=" text-2xl text-white "
+               style={{ fontFamily: "Serif" }}
+            >
+               {props.titleText}
+            </div>
+            <div
+               className="mt-2 text-lg text-white"
+               style={{ fontFamily: "Serif" }}
+            >
+               {props.descriptionText}
+            </div>
+         </div>
+      </div>
+   );
 }
 
 export default Robots;
