@@ -407,7 +407,7 @@ function Header(props) {
             /*#__PURE__*/ (0,jsx_runtime_.jsxs)((head_default()), {
                 children: [
                     /*#__PURE__*/ jsx_runtime_.jsx("title", {
-                        children: "BroncoBotics (WIP)"
+                        children: "BroncoBotics"
                     }),
                     /*#__PURE__*/ jsx_runtime_.jsx("meta", {
                         name: "description",

@@ -25,12 +25,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Members = ({ members: members1  })=>{
-    let { 0: year , 1: setYear  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
     let { 0: search , 1: setSearch  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
     let memberYears = [];
     members1 = members1.sort((a, b)=>a.graduationYear - b.graduationYear
     );
-    let filteredMembers;
     members1.forEach((member)=>{
         if (memberYears.includes(member.graduationYear)) {} else {
             memberYears.push(member.graduationYear);
@@ -56,7 +54,7 @@ const Members = ({ members: members1  })=>{
                 },
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
                     type: "text",
-                    className: "text-gray-50 w-[30%]",
+                    className: "w-[20%] min-w-[15rem] text-black",
                     value: search,
                     onChange: (e)=>setSearch(e.target.value)
                 })
@@ -64,7 +62,7 @@ const Members = ({ members: members1  })=>{
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                 className: "text-center ",
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("ul", {
-                    className: " m-auto w-[20%] outline-white ",
+                    className: " m-auto w-[20%] min-w-[15rem] outline-white ",
                     children: members1.filter((member)=>{
                         return member.name.toLowerCase().includes(search.toLowerCase());
                     }).map((members, index)=>{
