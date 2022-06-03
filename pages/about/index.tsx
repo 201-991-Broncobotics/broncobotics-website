@@ -2,7 +2,7 @@
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { NextPage } from "next";
-import Image from "next/image";
+
 
 const About: NextPage = () => {
    let imgFormatting =
@@ -29,7 +29,7 @@ const About: NextPage = () => {
                BroncoBotics currently has four different teams, with two
                competing in VEX, one in FTC, and one in FRC.
             </p>
-            <div className="mt-4 flex justify-center text-justify">
+            <div className="mt-4 md:flex-row flex-col justify-center text-justify">
                <div className="mx-2 mr-6 flex-1 font-medium ">
                   <img
                      src="https://upload.wikimedia.org/wikipedia/commons/3/38/Vex-Logo.jpg"
