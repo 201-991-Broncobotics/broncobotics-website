@@ -9,7 +9,7 @@
   "/photos": "pages/photos.html",
   "/robots": "pages/robots.html",
   "/socials": "pages/socials.html",
-  "/_document": "pages/_document.js",
   "/members": "pages/members.js",
+  "/_document": "pages/_document.js",
   "/404": "pages/404.html"
 }
