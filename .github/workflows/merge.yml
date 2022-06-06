@@ -1,16 +1,20 @@
-name: Merge upstream branches
+name: Sync Upstream
+
+# This runs every day on 1801 UTC
 on:
   schedule:
-    - cron:  "50 15 * * *"
+    - cron: '25 16 * * *'
+  # Allows manual workflow run (must in default branch to work)
+  workflow_dispatch:
+
 jobs:
-  merge:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Pulls from upstream
-        run: |
-          git config --global user.name 'rgodha24'
-          git config --global user.email 'rgodha24@users.noreply.github.com'
-
-          git pull "https://github.com/201-991-Broncobotics/broncobotics-website.git" 
-          git push "https://github.com/rgodha24/broncobotics-website.git"
+      - name: GitHub Sync to Upstream Repository
+        uses: dabreadman/sync-upstream-repo@v1.3.0
+        with: 
+          upstream_repo: https://github.com/201-991-Broncobotics/broncobotics-website.git
+          upstream_branch: master
+          downstream_branch: master
+          token: ${{ secrets.GITHUB_TOKEN }}
