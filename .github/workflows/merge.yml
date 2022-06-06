@@ -4,8 +4,6 @@ name: Sync Upstream
 on:
   schedule:
     - cron: '00 * * * *'
-  # Allows manual workflow run (must in default branch to work)
-  workflow_dispatch:
 
 jobs:
   build:
