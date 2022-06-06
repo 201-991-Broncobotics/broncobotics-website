@@ -6,17 +6,10 @@ jobs:
   merge:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Merge upstream
+      - name: Pulls from upstream
         run: |
           git config --global user.name 'rgodha24'
           git config --global user.email 'rgodha24@users.noreply.github.com'
 
-          git pull --unshallow 
-
-          git remote add upstream https://github.com/201-991-Broncobotics/broncobotics-website.git
-          git fetch upstream
-
-          git checkout master
-          git merge --no-edit upstream/master
-          git push origin master
+          git pull "https://github.com/201-991-Broncobotics/broncobotics-website.git" 
+          git push "https://github.com/rgodha24/broncobotics-website.git"
