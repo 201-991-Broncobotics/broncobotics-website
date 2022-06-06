@@ -1,11 +1,12 @@
 name: Merge upstream branches
 on:
   schedule:
-    - cron:  "30 15 * * *"
+    - cron:  "50 15 * * *"
 jobs:
   merge:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Pulls from upstream
         run: |
           git config --global user.name 'rgodha24'
