@@ -3,10 +3,14 @@
       "title": "rgodha24",
       "name": "Rohan Godha",
       "graduatingYear": 2024,
+      "currentTeams": [
+         "FTC"
+      ],
       "social": {
          "instagram": "https://instagram.com/rohangodha",
          "email": "rgodha24@brophybroncos.org",
-         "github": "https://github.com/rgodha24"
+         "github": "https://github.com/rgodha24", 
+         "website": "https://rohangodha.me/"
       }
    }
 ]
