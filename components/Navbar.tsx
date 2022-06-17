@@ -3,7 +3,14 @@ import Link from "next/link";
 import { useState } from "react";
 
 interface NavbarProps {
-   currentPage: "about" | "home" | "socials" | "robots" | "brophy" | "members";
+   currentPage:
+      | "about"
+      | "home"
+      | "socials"
+      | "robots"
+      | "brophy"
+      | "members"
+      | "none";
 }
 const Navbar = (props: NavbarProps) => {
    let [menuButton, setMenuButton] = useState(true);

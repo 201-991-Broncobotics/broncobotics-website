@@ -7,8 +7,7 @@
       "bradlc.vscode-tailwindcss", // Tailwind CSS
       "esbenp.prettier-vscode", // Prettier
       "dbaeumer.vscode-eslint", // TypeScript/TSLint
-      "csstools.postcss", // PostCSS
-      "formulahendry.auto-rename-tag" // Auto-rename tag
+      "csstools.postcss" // PostCSS
    ],
    // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
    "unwantedRecommendations": []
