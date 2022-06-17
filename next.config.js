@@ -34,7 +34,7 @@ module.exports = {
             source: "/email",
             destination: "mailto:broncobotics@brophyprep.org",
             permanent: false,
-         }
+         },
       ];
    },
 };

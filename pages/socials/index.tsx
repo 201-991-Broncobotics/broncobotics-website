@@ -21,7 +21,7 @@ const Socials = () => {
       // to add a new social media, just add a new link and name. it will add to the /socials page on the website. It is also recommended to add the social media to next.config.js in the redirects area (there are others there)
    ];
    return (
-      <div className="" style={{ backgroundColor: "rgb(109,110,113)" }}>
+      <div className="bg-gray-50">
          <Header currentPage="socials" />
          <div
             className="m-auto my-4 text-center text-5xl text-white "
