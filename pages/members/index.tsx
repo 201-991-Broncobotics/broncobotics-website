@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import type { InferGetStaticPropsType } from "next";
+import Link from "next/link";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -12,9 +13,11 @@ interface MemberType {
    email: string;
 }
 
-const Members = ({
-   members,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+interface MembersProps extends InferGetStaticPropsType<typeof getStaticProps> {
+   children?: React.ReactNode;
+}
+
+const Members = ({ members, children }: MembersProps) => {
    let [search, setSearch] = useState("");
 
    let memberYears: number[] = [];
@@ -33,6 +36,8 @@ const Members = ({
          <Header currentPage="members" />
 
          {/* <PeopleHierarchy /> */}
+
+         {children}
 
          <div
             className=" text-center text-4xl font-bold text-white"
@@ -75,15 +80,21 @@ interface MemberListProps {
 
 const MemberList = (props: MemberListProps) => {
    return (
-      <a href={"mailto:".concat(props.member.email)}>
-         <li
-            className="my-2 w-full bg-gray-50 text-2xl text-white  outline outline-1 outline-black   "
-            style={{ fontFamily: "Martel", listStyle: "none" }}
-         >
-            {props.member.name} {"'"}
-            {String(props.member.graduationYear).substring(2, 4)}.
-         </li>
-      </a>
+      <Link
+         href={"/members/".concat(
+            props.member.email.replace("@brophybroncos.org", "")
+         )}
+      >
+         <a>
+            <li
+               className="my-2 w-full bg-gray-50 text-2xl text-white  outline outline-1 outline-black   "
+               style={{ fontFamily: "Martel", listStyle: "none" }}
+            >
+               {props.member.name} {"'"}
+               {String(props.member.graduationYear).substring(2, 4)}.
+            </li>
+         </a>
+      </Link>
    );
 };
 
