@@ -11,6 +11,7 @@ interface MemberType {
    name: string;
    graduationYear: number;
    email: string;
+   link: string;
 }
 
 interface MembersProps extends InferGetStaticPropsType<typeof getStaticProps> {
