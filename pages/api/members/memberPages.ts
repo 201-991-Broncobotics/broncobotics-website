@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import type { MemberPageType } from "../../members/[member]";
 import { db } from "../../../firebase/clientApp";
 import { getDoc, doc } from "firebase/firestore";
+import cleanMember from "../../../utils/member";
 
 export default async function handler(
    req: NextApiRequest,
@@ -15,7 +16,7 @@ export default async function handler(
    if (docSnap.exists()) {
       let a = docSnap.data();
       a["title"] = title;
-      res.send(a as MemberPageType);
+      res.send(cleanMember(a as MemberPageType));
    } else {
       res.send(["DOES NOT EXIST"]);
    }
