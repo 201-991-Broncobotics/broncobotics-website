@@ -20,7 +20,7 @@ function Header(props: HeaderProps) {
       <>
          {!noHead ? (
             <Head>
-               <title>BroncoBotics - {props.currentPage}</title>
+               <title>BroncoBotics</title>
                <meta
                   name="description"
                   content="Brophy Robotics BroncoBotics FTC team 201 FRC team 991"

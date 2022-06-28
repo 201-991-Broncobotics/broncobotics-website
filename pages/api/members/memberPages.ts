@@ -1,29 +1,23 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import memberPagesJson from "../../../public/memberpages.json";
+import { getDoc, doc } from "firebase/firestore";
 
-export interface MemberPageType {
-   title: string;
-   name: string;
-   graduatingYear: number;
-   currentTeams: string[];
-   social: {
-      instagram?: string;
-      email: string;
-      github?: string;
-      twitter?: string;
-      phoneNumber?: string;
-      website?: string;
-   };
-}
+import type { MemberPageType } from "../../members/[member]";
+import { db } from "../../../firebase/db";
+import cleanMember from "../../../utils/member";
 
-export default function handler(
+export default async function handler(
    req: NextApiRequest,
    res: NextApiResponse<MemberPageType | ["DOES NOT EXIST"]>
 ) {
-   let title = req.query.title;
-   let memberPages: MemberPageType[] = memberPagesJson;
+   let title = decodeURI(req.query.title as string);
+   const docRef = doc(db, "members", title);
+   let docSnap = await getDoc(docRef);
 
-   let a = memberPages.find((memberPage) => memberPage.title === title);
-
-   res.send(a == undefined ? ["DOES NOT EXIST"] : a);
+   if (docSnap.exists()) {
+      let a = docSnap.data();
+      a["title"] = title;
+      res.send(cleanMember(a as MemberPageType));
+   } else {
+      res.send(["DOES NOT EXIST"]);
+   }
 }

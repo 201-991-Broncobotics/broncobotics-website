@@ -30,3 +30,7 @@ out
 # python 
 *.py
 __pycache__
+
+# testing
+test.*
+firebase/*.js
