@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
@@ -61,17 +63,20 @@ interface SocialButtonProps {
 
 let SocialButton = (props: SocialButtonProps): JSX.Element => {
    return (
-      <a href={props.link}>
-         <li
-            className={
-               "my-2 w-auto rounded-xl border-2 bg-red-500  hover:border-red-500 hover:bg-white hover:text-black"
-            }
-            style={{ fontFamily: "Roboto Slab" }}
-         >
-            {props.name}
-         </li>
-      </a>
+      <Link href={props.link}>
+         <a>
+            <li
+               className={
+                  "my-2 w-auto rounded-xl border-2 bg-red-500  hover:border-red-500 hover:bg-white hover:text-black"
+               }
+               style={{ fontFamily: "Roboto Slab" }}
+            >
+               {props.name}
+            </li>
+         </a>
+      </Link>
    );
 };
 
 export default Socials;
+export { SocialButton };

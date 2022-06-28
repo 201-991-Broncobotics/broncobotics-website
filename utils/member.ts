@@ -4,8 +4,7 @@ let cleanMember = (member: MemberPageType): MemberPageType => {
    let b: string[] = [];
    member.currentTeams.forEach((a) => {
       if (a !== "") {
-         b.push(a);
-      } else {
+         b.push(a.trim());
       }
    });
    member.currentTeams = b;

@@ -1,74 +1,108 @@
-import memberPagesInfoJson from "../../public/memberpages.json";
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
+import type { GetStaticProps, GetStaticPaths } from "next";
+import { collection, getDocs, getDoc, doc } from "firebase/firestore";
+import Head from "next/head";
+
+import { db } from "../../firebase/db";
 import Header from "../../components/Header";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import cleanMember from "../../utils/member";
 
-export type teamTypes = "VEX" | "FTC" | "FRC" | "LEADERSHIP";
-
-export interface MemberPageType {
-   title: string;
+export interface MemberPageTypeNoTitle {
    name: string;
    graduatingYear: number;
    currentTeams: string[];
+   photo?: string;
    social: {
       instagram?: string;
       email: string;
       github?: string;
       twitter?: string;
       phoneNumber?: string;
-      website?: string;
    };
 }
 
-const MemberPage = ({
-   member,
-}: {
-   member: MemberPageType | ["DOES NOT EXIST"];
-}) => {
-   let router = useRouter();
-   let a: string = "";
-   useEffect(() => {
-      if (Array.isArray(member)) {
-         router.replace("/members/notfound");
-      }
-   });
+export interface MemberPageType extends MemberPageTypeNoTitle {
+   title: string;
+}
 
+export interface MemberPageTypeUndefined {
+   title?: string;
+   name?: string;
+   graduatingYear?: number;
+   currentTeams?: Array<string>;
+   photo?: string;
+   social?: {
+      instagram?: string;
+      email?: string;
+      github?: string;
+      twitter?: string;
+      phoneNumber?: string;
+   };
+}
+
+const MemberPage = (props: { member: MemberPageType }) => {
+   let member: MemberPageType = props.member;
    return (
       <div>
+         <Head>
+            <title>{"BroncoBotics - " + member.name}</title>
+            <link rel="icon" href="/logo.svg" />
+            <meta
+               name="description"
+               content={"The BroncoBotics member " + member.name}
+            />
+         </Head>
          <Header currentPage="none" noHead></Header>
+
+         {JSON.stringify(member)}
       </div>
    );
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
    let b = context.params || { member: "faewuhfiuaewhifuawefiua" };
+   let title = (b.member as string) || "AsdfawiefiasiBHBSDAJFHB";
 
-   let a = await fetch(
-      `https://broncobotics.vercel.app/api/members/memberPages?title=${
-         b.member || "AsdfawiefiasiBHBSDAJFHB"
-      }`
-   );
+   const docRef = doc(db, "members", title);
+   let docSnap = await getDoc(docRef);
 
-   let member: MemberPageType | ["DOES NOT EXIST"] = await a.json();
+   if (docSnap.exists()) {
+      let a = docSnap.data();
+      a["title"] = title;
+
+      return {
+         props: {
+            member: cleanMember(a as MemberPageType),
+         },
+         revalidate: 3600,
+      };
+   } else {
+      // res.send(["DOES NOT EXIST"]);
+      return {
+         redirect: {
+            destination: "/members/notfound",
+            permanent: false,
+         },
+         revalidate: 3600,
+      };
+   }
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+   let paths: {
+      params: {
+         member: string;
+      };
+   }[] = [];
+
+   let querySnapshot = await getDocs(collection(db, "members"));
+   querySnapshot.forEach((doc) => {
+      paths.push({ params: { member: doc.id } });
+   });
 
    return {
-      props: {
-         member,
-      },
-      revalidate: 10800, // rebuilds it every 3 hours if it is requested
+      paths,
+      fallback: "blocking",
    };
 };
 
-export async function getStaticPaths() {
-   const memberPagesInfo: MemberPageType[] = memberPagesInfoJson;
-   return {
-      paths: memberPagesInfo.map((member) => ({
-         params: {
-            member: member.title,
-         },
-      })),
-      fallback: true,
-   };
-}
 export default MemberPage;
