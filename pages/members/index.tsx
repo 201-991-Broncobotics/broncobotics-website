@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { useState } from "react";
-import type { InferGetStaticPropsType } from "next";
+import type { InferGetStaticPropsType, GetStaticProps } from "next";
 import Link from "next/link";
 import { collection, query, where, getDocs } from "firebase/firestore";
 
@@ -144,6 +144,7 @@ export const getStaticProps = async () => {
       props: {
          members: await Promise.all(b),
       },
+      revalidate: 10_800, 
    };
 };
 
