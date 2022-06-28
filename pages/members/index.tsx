@@ -144,7 +144,7 @@ export const getStaticProps = async () => {
       props: {
          members: await Promise.all(b),
       },
-      revalidate: 10_800, 
+      revalidate: 10_800,
    };
 };
 

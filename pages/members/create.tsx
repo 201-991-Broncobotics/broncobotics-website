@@ -30,7 +30,7 @@ import { auth } from "../../firebase/auth";
  * it also has way too many js imports so it will take forever to load :)
  * it also exposes firebase api keys but i think thats fine?? but this is definitely react hell
  * at least its strongly typed that should help??
- * IT WORKS OH MY GOD 
+ * IT WORKS OH MY GOD
  */
 
 const Create = () => {
