@@ -3,21 +3,25 @@ import { collection, getDocs, getDoc, doc } from "firebase/firestore";
 import Head from "next/head";
 
 import { db } from "../../firebase/db";
+
 import Header from "../../components/Header";
 import cleanMember from "../../utils/member";
+import { SocialButton } from "../socials/index";
+
+interface Socials {
+   instagram?: string;
+   email: string;
+   github?: string;
+   twitter?: string;
+   phoneNumber?: string;
+}
 
 export interface MemberPageTypeNoTitle {
    name: string;
    graduatingYear: number;
    currentTeams: string[];
    photo?: string;
-   social: {
-      instagram?: string;
-      email: string;
-      github?: string;
-      twitter?: string;
-      phoneNumber?: string;
-   };
+   social: Socials;
 }
 
 export interface MemberPageType extends MemberPageTypeNoTitle {
@@ -51,13 +55,24 @@ const MemberPage = (props: { member: MemberPageType }) => {
                content={"The BroncoBotics member " + member.name}
             />
          </Head>
-         <Header currentPage="none" noHead></Header>
-
+         <Header currentPage="none" noHead />
          {JSON.stringify(member)}
+         <Socials social={member.social} />
       </div>
    );
 };
 
+type SocialsProps = {social: Socials};
+
+let Socials = ({social}: SocialsProps) => {
+   return <ul className=" min-w-[10rem] max-w-[60%] text-center text-4xl sm:w-[50%] md:w-[30%] lg:w-[30%]  ">
+      {social.twitter !== undefined ? <SocialButton name="Twitter" link={social.twitter} ></SocialButton> : ""}
+      {social.email !== undefined ? <SocialButton name="Email" link={social.email} ></SocialButton> : ""}
+      {social.phoneNumber !== undefined ? <SocialButton name="Phone Number" link={social.phoneNumber} ></SocialButton> : ""}
+      {social.instagram !== undefined ? <SocialButton name="Instagram" link={social.instagram} ></SocialButton> : ""}
+      {social.github !== undefined ? <SocialButton name="Github" link={social.github} ></SocialButton> : ""}
+   </ul>;
+};
 export const getStaticProps: GetStaticProps = async (context) => {
    let b = context.params || { member: "faewuhfiuaewhifuawefiua" };
    let title = (b.member as string) || "AsdfawiefiasiBHBSDAJFHB";

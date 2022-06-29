@@ -30,7 +30,6 @@ import { auth } from "../../firebase/auth";
  * it also has way too many js imports so it will take forever to load :)
  * it also exposes firebase api keys but i think thats fine?? but this is definitely react hell
  * at least its strongly typed that should help??
- * IT WORKS OH MY GOD
  */
 
 const Create = () => {
@@ -64,7 +63,7 @@ let UserReal = ({ user }: { user: UserCredential }) => {
    );
    let title = member?.title;
    let setTitle = (title: string) => {
-      setMember({ ...member, title: title.trim() });
+      setMember({ ...member, title: title.trim().toLowerCase() });
    };
 
    let [exists, setExists] = useState<boolean>(false);
@@ -260,26 +259,7 @@ let UserReal = ({ user }: { user: UserCredential }) => {
                />
             </p>
             <p className="w-full">
-               Title
-               {!exists
-                  ? " (the /members/ link to your page. Unchangeable once it is set)"
-                  : ""}
-               :{" "}
-               {exists ? (
-                  title + "(unchangeable)"
-               ) : (
-                  <input
-                     type="text"
-                     value={title}
-                     className={"w-full ".concat(
-                        titleTaken ? "bg-red-500" : "bg-green-500"
-                     )}
-                     onChange={(event) => {
-                        setTitle(event.target.value);
-                        console.log(event.target.value);
-                     }}
-                  />
-               )}
+               Title: {title}. This means the link to your page will be {`/members/${title}`}
             </p>
             <p>
                Current Teams:
