@@ -2,8 +2,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getDoc, doc } from "firebase/firestore";
 
 import type { MemberPageType } from "../../members/[member]";
-import { db } from "../../../firebase/db";
-import cleanMember from "../../../utils/member";
+import { db } from "../../../components/firebase/db";
+import cleanMember from "../../../components/utils/cleanMember";
 
 export default async function handler(
    req: NextApiRequest,

@@ -2,10 +2,10 @@ import type { GetStaticProps, GetStaticPaths } from "next";
 import { collection, getDocs, getDoc, doc } from "firebase/firestore";
 import Head from "next/head";
 
-import { db } from "../../firebase/db";
+import { db } from "../../components/firebase/db";
 
 import Header from "../../components/Header";
-import cleanMember from "../../utils/member";
+import cleanMember from "../../components/utils/cleanMember";
 import { SocialButton } from "../socials/index";
 
 interface Socials {
@@ -62,16 +62,44 @@ const MemberPage = (props: { member: MemberPageType }) => {
    );
 };
 
-type SocialsProps = {social: Socials};
+type SocialsProps = { social: Socials };
 
-let Socials = ({social}: SocialsProps) => {
-   return <ul className=" min-w-[10rem] max-w-[60%] text-center text-4xl sm:w-[50%] md:w-[30%] lg:w-[30%]  ">
-      {social.twitter !== undefined ? <SocialButton name="Twitter" link={social.twitter} ></SocialButton> : ""}
-      {social.email !== undefined ? <SocialButton name="Email" link={social.email} ></SocialButton> : ""}
-      {social.phoneNumber !== undefined ? <SocialButton name="Phone Number" link={social.phoneNumber} ></SocialButton> : ""}
-      {social.instagram !== undefined ? <SocialButton name="Instagram" link={social.instagram} ></SocialButton> : ""}
-      {social.github !== undefined ? <SocialButton name="Github" link={social.github} ></SocialButton> : ""}
-   </ul>;
+let Socials = ({ social }: SocialsProps) => {
+   return (
+      <ul className=" min-w-[10rem] max-w-[60%] text-center text-4xl sm:w-[50%] md:w-[30%] lg:w-[30%]  ">
+         {social.twitter !== undefined ? (
+            <SocialButton name="Twitter" link={social.twitter}></SocialButton>
+         ) : (
+            ""
+         )}
+         {social.email !== undefined ? (
+            <SocialButton name="Email" link={social.email}></SocialButton>
+         ) : (
+            ""
+         )}
+         {social.phoneNumber !== undefined ? (
+            <SocialButton
+               name="Phone Number"
+               link={social.phoneNumber}
+            ></SocialButton>
+         ) : (
+            ""
+         )}
+         {social.instagram !== undefined ? (
+            <SocialButton
+               name="Instagram"
+               link={social.instagram}
+            ></SocialButton>
+         ) : (
+            ""
+         )}
+         {social.github !== undefined ? (
+            <SocialButton name="Github" link={social.github}></SocialButton>
+         ) : (
+            ""
+         )}
+      </ul>
+   );
 };
 export const getStaticProps: GetStaticProps = async (context) => {
    let b = context.params || { member: "faewuhfiuaewhifuawefiua" };

@@ -1,5 +1,5 @@
 import realNames from "../../../public/realNames.json";
-import { db } from "../../../firebase/db";
+import { db } from "../../../components/firebase/db";
 import { collection, query, where, getDocs } from "firebase/firestore";
 
 import type { NextApiRequest, NextApiResponse } from "next";

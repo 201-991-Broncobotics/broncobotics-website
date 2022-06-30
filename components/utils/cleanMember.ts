@@ -1,5 +1,10 @@
-import type { MemberPageType } from "../pages/members/[member]";
+import type { MemberPageType } from "../../pages/members/[member]";
 
+/**
+ * Takes a member type returned by firesetore and cleans it up by removing empty strings and nulls.
+ *
+ * @param member The member to clean.
+ */
 let cleanMember = (member: MemberPageType): MemberPageType => {
    let b: string[] = [];
    member.currentTeams.forEach((a) => {

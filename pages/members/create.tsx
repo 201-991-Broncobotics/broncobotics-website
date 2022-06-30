@@ -1,13 +1,6 @@
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
-import {
-   collection,
-   query,
-   where,
-   getDocs,
-   doc,
-   setDoc,
-} from "firebase/firestore/lite";
+import { collection, query, where, getDocs } from "firebase/firestore/lite";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
@@ -18,12 +11,13 @@ import type {
    MemberPageTypeNoTitle,
 } from "./[member]";
 
-import { liteDb } from "../../firebase/litedb";
-import cleanMember from "../../utils/member";
+import { liteDb } from "../../components/firebase/litedb";
+import cleanMember from "../../components/utils/cleanMember";
+import checkTitle from "../../components/utils/checkTitle";
 
 import Header from "../../components/Header";
+import { auth } from "../../components/firebase/auth";
 import Footer from "../../components/Footer";
-import { auth } from "../../firebase/auth";
 
 /*
  * holy fuck this is so unreadable i am so sorry to anyone who is trying to work on this page
@@ -73,6 +67,7 @@ let UserReal = ({ user }: { user: UserCredential }) => {
    let [ftc, setftc] = useState<boolean>(false);
    let [frc, setfrc] = useState<boolean>(false);
    let [leadership, setleadership] = useState<boolean>(false);
+   let [possibleTitles, setPossibleTitles] = useState<string[]>([]);
    let router = useRouter();
 
    useEffect(() => {
@@ -102,6 +97,8 @@ let UserReal = ({ user }: { user: UserCredential }) => {
       });
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
+
+   useEffect(() => {}, []);
 
    useEffect(() => {
       let a = async () => {
@@ -146,7 +143,7 @@ let UserReal = ({ user }: { user: UserCredential }) => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [vex, ftc, frc, leadership]);
 
-   let handleSubmit = () => {
+   let handleSubmit = async () => {
       console.log("test");
       if (titleTaken) {
          alert("Please choose a title that isn't taken!");
@@ -170,25 +167,28 @@ let UserReal = ({ user }: { user: UserCredential }) => {
          );
       }
 
+      const { doc, setDoc } = await import("firebase/firestore/lite");
+
       // now we know that all of the required things are here
       if (member?.title !== undefined) {
          if (member.name !== undefined) {
             if (member.graduatingYear !== undefined) {
                if (Array.isArray(member.currentTeams)) {
                   if (member.social?.email !== undefined) {
-                     let a: MemberPageTypeNoTitle = {
-                        name: member.name,
-                        graduatingYear: member.graduatingYear,
-                        currentTeams: member.currentTeams,
-                        photo: member.photo || "",
-                        social: {
-                           instagram: member.social.instagram || "",
-                           email: member.social.email,
-                           github: member.social.github || "",
-                           twitter: member.social.twitter || "",
-                           phoneNumber: member.social.phoneNumber || "",
-                        },
-                     };
+                     /*the only reason this exists is for typescript */ let a: MemberPageTypeNoTitle =
+                        {
+                           name: member.name,
+                           graduatingYear: member.graduatingYear,
+                           currentTeams: member.currentTeams,
+                           photo: member.photo || "",
+                           social: {
+                              instagram: member.social.instagram || "",
+                              email: member.social.email,
+                              github: member.social.github || "",
+                              twitter: member.social.twitter || "",
+                              phoneNumber: member.social.phoneNumber || "",
+                           },
+                        };
 
                      setDoc(doc(liteDb, "members", member.title), a)
                         .then(async () => {
@@ -205,7 +205,9 @@ let UserReal = ({ user }: { user: UserCredential }) => {
                                  );
                               } else {
                                  alert(
-                                    "Data set in database, and your page should be revalidated"
+                                    `Data set in database, and your page (/members/${
+                                       member?.title || "aefawfea"
+                                    }) should be revalidated`
                                  );
                               }
                            }
@@ -259,7 +261,8 @@ let UserReal = ({ user }: { user: UserCredential }) => {
                />
             </p>
             <p className="w-full">
-               Title: {title}. This means the link to your page will be {`/members/${title}`}
+               Title: {title}. This means the link to your page will be{" "}
+               {`/members/${title}`}
             </p>
             <p>
                Current Teams:

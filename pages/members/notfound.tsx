@@ -3,7 +3,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 
 import MembersPage from "../members/index";
 import type { MemberType } from "../members/index";
-import { db } from "../../firebase/db";
+import { db } from "../../components/firebase/db";
 import realNames from "../../public/realNames.json";
 
 const NotFoundMembers = (

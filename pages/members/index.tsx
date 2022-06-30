@@ -1,4 +1,4 @@
-import {  useMemo } from "react";
+import { useMemo } from "react";
 import { useState } from "react";
 import Link from "next/link";
 import { collection, query, where, getDocs } from "firebase/firestore";
@@ -29,25 +29,25 @@ const Members = ({ members, children }: MembersProps) => {
 
    let memberYears: number[] = [];
 
-   // fuzzy search with fuse
+   const fuse = useMemo(() => {
+      return new Fuse(members, {
+         includeScore: true,
+         keys: [
+            { name: "name", weight: 5 },
+            { name: "graduationYear", weight: 3 },
+            { name: "email", weight: 1 },
+         ],
+      });
+   }, [members]);
 
+   // fuzzy search with fuse
    let membersList: MemberType[] = useMemo(() => {
       if (search !== "") {
-         const fuse = new Fuse(members, {
-            includeScore: true,
-            keys: [
-               { name: "name", weight: 2 },
-               { name: "graduationYear", weight: 0.3 },
-               { name: "email", weight: 0.5 },
-            ],
-         });
          return fuse.search(search.toLowerCase()).map((a) => a.item);
       } else {
          return members;
       }
-
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [search]);
+   }, [search, members, fuse]);
 
    members = members.sort((a, b) => a.graduationYear - b.graduationYear);
 
@@ -95,7 +95,7 @@ const Members = ({ members, children }: MembersProps) => {
          </div>
          <div className="text-center ">
             <ul className="  m-auto w-[20%] min-w-[15rem] outline-white ">
-               {membersList.map((members, index) => {
+               {(membersList || members).map((members, index) => {
                   return <MemberList member={members} key={index} />;
                })}
             </ul>
