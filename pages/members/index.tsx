@@ -1,10 +1,13 @@
-import type { ReactNode } from "react";
+import {  useMemo } from "react";
 import { useState } from "react";
-import type { InferGetStaticPropsType, GetStaticProps } from "next";
 import Link from "next/link";
 import { collection, query, where, getDocs } from "firebase/firestore";
+import Fuse from "fuse.js";
 
-import { db } from "../../firebase/db";
+import type { ReactNode } from "react";
+import type { InferGetStaticPropsType, GetStaticProps } from "next";
+
+import { db } from "../../components/firebase/db";
 import realNames from "../../public/realNames.json";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -26,6 +29,26 @@ const Members = ({ members, children }: MembersProps) => {
 
    let memberYears: number[] = [];
 
+   // fuzzy search with fuse
+
+   let membersList: MemberType[] = useMemo(() => {
+      if (search !== "") {
+         const fuse = new Fuse(members, {
+            includeScore: true,
+            keys: [
+               { name: "name", weight: 2 },
+               { name: "graduationYear", weight: 0.3 },
+               { name: "email", weight: 0.5 },
+            ],
+         });
+         return fuse.search(search.toLowerCase()).map((a) => a.item);
+      } else {
+         return members;
+      }
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [search]);
+
    members = members.sort((a, b) => a.graduationYear - b.graduationYear);
 
    members.forEach((member) => {
@@ -42,6 +65,16 @@ const Members = ({ members, children }: MembersProps) => {
          {/* <PeopleHierarchy /> */}
 
          {children}
+
+         <p
+            className=" text-center text-2xl font-bold text-white "
+            style={{ fontFamily: "Roboto Slab" }}
+         >
+            Create your page if you are a BroncoBotics member by clicking
+            <Link href="/members/create" className=" text-center font-normal">
+               <a className="text-blue-500 hover:cursor-pointer">{" here"}</a>
+            </Link>
+         </p>
 
          <div
             className=" text-center text-4xl font-bold text-white"
@@ -62,15 +95,9 @@ const Members = ({ members, children }: MembersProps) => {
          </div>
          <div className="text-center ">
             <ul className="  m-auto w-[20%] min-w-[15rem] outline-white ">
-               {members
-                  .filter((member) => {
-                     return member.name
-                        .toLowerCase()
-                        .includes(search.toLowerCase());
-                  })
-                  .map((members, index) => {
-                     return <MemberList member={members} key={index} />;
-                  })}
+               {membersList.map((members, index) => {
+                  return <MemberList member={members} key={index} />;
+               })}
             </ul>
          </div>
          <Footer />
