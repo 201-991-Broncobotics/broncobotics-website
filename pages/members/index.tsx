@@ -95,8 +95,8 @@ const Members = ({ members, children }: MembersProps) => {
          </div>
          <div className="text-center ">
             <ul className="  m-auto w-[20%] min-w-[15rem] outline-white ">
-               {(membersList || members).map((members, index) => {
-                  return <MemberList member={members} key={index} />;
+               {(membersList || members).map((members) => {
+                  return <MemberList member={members} key={members.email} />;
                })}
             </ul>
          </div>
@@ -104,7 +104,6 @@ const Members = ({ members, children }: MembersProps) => {
       </div>
    );
 };
-
 interface MemberListProps {
    member: MemberType;
 }
