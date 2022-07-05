@@ -5,10 +5,10 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import Fuse from "fuse.js";
 
 import type { ReactNode } from "react";
-import type { InferGetStaticPropsType, GetStaticProps } from "next";
+import type { InferGetStaticPropsType } from "next";
 
 import { db } from "../../components/firebase/db";
-import realNames from "../../public/realNames.json";
+
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 // import PeopleHierarchy from "../../components/PeopleHierarchy";
@@ -32,9 +32,14 @@ const Members = ({ members, children }: MembersProps) => {
    const fuse = useMemo(() => {
       return new Fuse(members, {
          includeScore: true,
+         isCaseSensitive: false,
          keys: [
             { name: "name", weight: 5 },
-            { name: "graduationYear", weight: 3 },
+            {
+               name: "graduationYear",
+               weight: 9,
+               getFn: (member) => member.graduationYear.toString(),
+            },
             { name: "email", weight: 1 },
          ],
       });
@@ -43,7 +48,7 @@ const Members = ({ members, children }: MembersProps) => {
    // fuzzy search with fuse
    let membersList: MemberType[] = useMemo(() => {
       if (search !== "") {
-         return fuse.search(search.toLowerCase()).map((a) => a.item);
+         return fuse.search(search).map((a) => a.item);
       } else {
          return members;
       }
@@ -139,9 +144,10 @@ const MemberList = (props: MemberListProps) => {
 };
 
 export const getStaticProps = async () => {
-   let a = realNames;
+   let a = await getDocs(query(collection(db, "realNames")));
 
-   let b = a.map(async (a) => {
+   let b = a.docs.map(async (m) => {
+      let a = m.data();
       const q = query(
          collection(db, "members"),
          where("social.email", "==", a.email)

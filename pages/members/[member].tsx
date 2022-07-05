@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import type { GetStaticProps, GetStaticPaths } from "next";
 import { collection, getDocs, getDoc, doc } from "firebase/firestore";
 import Head from "next/head";
@@ -7,6 +8,7 @@ import { db } from "../../components/firebase/db";
 import Header from "../../components/Header";
 import cleanMember from "../../components/utils/cleanMember";
 import { SocialButton } from "../socials/index";
+import noPicture from "../../public/no_picture.png";
 
 interface Socials {
    instagram?: string;
@@ -57,7 +59,23 @@ const MemberPage = (props: { member: MemberPageType }) => {
          </Head>
          <Header currentPage="none" noHead />
          {JSON.stringify(member)}
-         <Socials social={member.social} />
+
+         <div className="flex w-auto  flex-row ">
+            <div className="flex-1 ">
+               <img
+                  src={member.photo || noPicture.src}
+                  alt={
+                     member.photo
+                        ? "photo of " + member.name
+                        : "This member does not have a picture"
+                  }
+                  className="h-full w-full object-cover "
+               />
+            </div>
+            <div className="flex-1 ">
+               <Socials social={member.social} />
+            </div>
+         </div>
       </div>
    );
 };
@@ -73,14 +91,17 @@ let Socials = ({ social }: SocialsProps) => {
             ""
          )}
          {social.email !== undefined ? (
-            <SocialButton name="Email" link={social.email}></SocialButton>
+            <SocialButton
+               name="Email"
+               link={"mailto:" + social.email}
+            ></SocialButton>
          ) : (
             ""
          )}
          {social.phoneNumber !== undefined ? (
             <SocialButton
                name="Phone Number"
-               link={social.phoneNumber}
+               link={"tel:" + social.phoneNumber}
             ></SocialButton>
          ) : (
             ""
@@ -102,32 +123,51 @@ let Socials = ({ social }: SocialsProps) => {
    );
 };
 export const getStaticProps: GetStaticProps = async (context) => {
-   let b = context.params || { member: "faewuhfiuaewhifuawefiua" };
-   let title = (b.member as string) || "AsdfawiefiasiBHBSDAJFHB";
+   // let b = context.params || { member: "faewuhfiuaewhifuawefiua" };
+   // let title = (b.member as string) || "AsdfawiefiasiBHBSDAJFHB";
 
-   const docRef = doc(db, "members", title);
-   let docSnap = await getDoc(docRef);
+   // const docRef = doc(db, "members", title);
+   // let docSnap = await getDoc(docRef);
 
-   if (docSnap.exists()) {
-      let a = docSnap.data();
-      a["title"] = title;
+   // if (docSnap.exists()) {
+   //    let a = docSnap.data();
+   //    a["title"] = title;
 
-      return {
-         props: {
-            member: cleanMember(a as MemberPageType),
-         },
-         revalidate: 3600,
-      };
-   } else {
-      // res.send(["DOES NOT EXIST"]);
-      return {
-         redirect: {
-            destination: "/members/notfound",
-            permanent: false,
-         },
-         revalidate: 3600,
-      };
-   }
+   //    return {
+   //       props: {
+   //          member: cleanMember(a as MemberPageType),
+   //       },
+   //       revalidate: 3600,
+   //    };
+   // } else {
+   //    // res.send(["DOES NOT EXIST"]);
+   //    return {
+   //       redirect: {
+   //          destination: "/members/notfound",
+   //          permanent: false,
+   //       },
+   //       revalidate: 3600,
+   //    };
+   // }
+
+   let a: MemberPageType = {
+      name: "Rohan Godha",
+      currentTeams: ["FTC", "FRC"],
+      title: "rohangodha",
+      graduatingYear: 2024,
+      social: {
+         email: "rgodha24@brophybroncos.org",
+         github: "https://github.com/rgodha24",
+         instagram: "https://instagram.com/rohangodha",
+         phoneNumber: "480 758-1529",
+      },
+   };
+
+   return {
+      props: {
+         member: cleanMember(a),
+      },
+   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

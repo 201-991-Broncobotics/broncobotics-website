@@ -1,17 +1,17 @@
-import realNames from "../../../public/realNames.json";
 import { db } from "../../../components/firebase/db";
 import { collection, query, where, getDocs } from "firebase/firestore";
 
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { MemberType } from "../../members/index";
 
-export default function handler(
+export default async function handler(
    req: NextApiRequest,
-   res: NextApiResponse<MemberType[]>
+   res: NextApiResponse
 ) {
-   let a = realNames;
+   let a = await getDocs(query(collection(db, "realNames")));
 
-   let b = a.map(async (a) => {
+   let b = a.docs.map(async (m) => {
+      let a = m.data();
       const q = query(
          collection(db, "members"),
          where("social.email", "==", a.email)
@@ -36,7 +36,7 @@ export default function handler(
       return await c;
    });
 
-   let c = Promise.all(b).then((a) => res.send(a));
+   Promise.all(b).then((a) => res.send(a));
    // holy fuck that was so painful i hate async javascript why does Array.map return an array
    // of promises instead of a promise of an array i am so glad i remembered Promise.all exists
 }

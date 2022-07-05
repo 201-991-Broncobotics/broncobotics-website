@@ -34,3 +34,7 @@ __pycache__
 # testing
 test.*
 firebase/*.js
+
+# firebase 
+*firebase*
+*firestore*
