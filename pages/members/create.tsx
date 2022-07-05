@@ -60,7 +60,6 @@ let UserReal = ({ user }: { user: UserCredential }) => {
       setMember({ ...member, title: title.trim().toLowerCase() });
    };
 
-   let [exists, setExists] = useState<boolean>(false);
    let [titleTaken, setTitleTaken] = useState<boolean>(false);
 
    let [vex, setVex] = useState<boolean>(false);
@@ -82,7 +81,7 @@ let UserReal = ({ user }: { user: UserCredential }) => {
             );
             console.log(querySnapshot.docs[0].data());
             setTitle(querySnapshot.docs[0].id);
-            setExists(true);
+            router.replace("/members/edit");
          } else {
             setMember({
                ...member,
@@ -92,7 +91,6 @@ let UserReal = ({ user }: { user: UserCredential }) => {
                   email: user.user.email as string,
                },
             });
-            setExists(false);
          }
       });
       // eslint-disable-next-line react-hooks/exhaustive-deps

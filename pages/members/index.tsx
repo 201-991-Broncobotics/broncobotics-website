@@ -27,8 +27,6 @@ interface MembersProps extends InferGetStaticPropsType<typeof getStaticProps> {
 const Members = ({ members, children }: MembersProps) => {
    let [search, setSearch] = useState("");
 
-   let memberYears: number[] = [];
-
    const fuse = useMemo(() => {
       return new Fuse(members, {
          includeScore: true,
@@ -53,15 +51,6 @@ const Members = ({ members, children }: MembersProps) => {
          return members;
       }
    }, [search, members, fuse]);
-
-   members = members.sort((a, b) => a.graduationYear - b.graduationYear);
-
-   members.forEach((member) => {
-      if (memberYears.includes(member.graduationYear)) {
-      } else {
-         memberYears.push(member.graduationYear);
-      }
-   });
 
    return (
       <div className="bg-gray-50">

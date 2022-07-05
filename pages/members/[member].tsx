@@ -123,51 +123,33 @@ let Socials = ({ social }: SocialsProps) => {
    );
 };
 export const getStaticProps: GetStaticProps = async (context) => {
-   // let b = context.params || { member: "faewuhfiuaewhifuawefiua" };
-   // let title = (b.member as string) || "AsdfawiefiasiBHBSDAJFHB";
+   let b = context.params || { member: "faewuhfiuaewhifuawefiua" };
+   let title = (b.member as string) || "AsdfawiefiasiBHBSDAJFHB";
 
-   // const docRef = doc(db, "members", title);
-   // let docSnap = await getDoc(docRef);
+   const docRef = doc(db, "members", title);
+   let docSnap = await getDoc(docRef);
 
-   // if (docSnap.exists()) {
-   //    let a = docSnap.data();
-   //    a["title"] = title;
+   if (docSnap.exists()) {
+      let a = docSnap.data();
+      a["title"] = title;
 
-   //    return {
-   //       props: {
-   //          member: cleanMember(a as MemberPageType),
-   //       },
-   //       revalidate: 3600,
-   //    };
-   // } else {
-   //    // res.send(["DOES NOT EXIST"]);
-   //    return {
-   //       redirect: {
-   //          destination: "/members/notfound",
-   //          permanent: false,
-   //       },
-   //       revalidate: 3600,
-   //    };
-   // }
-
-   let a: MemberPageType = {
-      name: "Rohan Godha",
-      currentTeams: ["FTC", "FRC"],
-      title: "rohangodha",
-      graduatingYear: 2024,
-      social: {
-         email: "rgodha24@brophybroncos.org",
-         github: "https://github.com/rgodha24",
-         instagram: "https://instagram.com/rohangodha",
-         phoneNumber: "480 758-1529",
-      },
-   };
-
-   return {
-      props: {
-         member: cleanMember(a),
-      },
-   };
+      return {
+         props: {
+            member: cleanMember(a as MemberPageType),
+         },
+         revalidate: 3600,
+      };
+   } else {
+      // res.send(["DOES NOT EXIST"]);
+      return {
+         redirect: {
+            destination: "/members/notfound",
+            permanent: false,
+         },
+         revalidate: 3600,
+      };
+   }
+   
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
