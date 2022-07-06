@@ -26,11 +26,7 @@ let cleanMember = (member: MemberPageType): MemberPageType => {
       delete member["social"]["phoneNumber"];
    } else if (member.social.phoneNumber !== undefined) {
       member.social.phoneNumber = member.social.phoneNumber
-         .trim()
-         .replaceAll("-", "")
-         .replaceAll("(", "")
-         .replaceAll(")", "")
-         .replaceAll(" ", "")
+         .replaceAll(/[ \,\-\(\)a-z]/gi, "")
          .trim();
    }
 
