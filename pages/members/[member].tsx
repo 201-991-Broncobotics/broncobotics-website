@@ -137,7 +137,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
          props: {
             member: cleanMember(a as MemberPageType),
          },
-         revalidate: 3600,
+         revalidate: 1800,
       };
    } else {
       // res.send(["DOES NOT EXIST"]);
@@ -146,7 +146,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
             destination: "/members/notfound",
             permanent: false,
          },
-         revalidate: 3600,
+         revalidate: 1800,
       };
    }
 };

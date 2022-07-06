@@ -186,8 +186,10 @@ let UserReal = ({ user }: { user: UserCredential }) => {
                         .then((a) => {
                            if (a) {
                               if (a === 500) {
+                                 fetch("/members")
+                                 fetch(`/members/${member!.title}`)
                                  alert(
-                                    "Data set in database, but the page was not rerendered. It might take up to 3 hours to notice the changes on your page"
+                                    "Data set in database, but the page was not rerendered. visit the page in 30 minutes to see the changes"
                                  );
                               } else {
                                  alert(
