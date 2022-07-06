@@ -25,9 +25,13 @@ let cleanMember = (member: MemberPageType): MemberPageType => {
    if (member.social.phoneNumber === "") {
       delete member["social"]["phoneNumber"];
    } else if (member.social.phoneNumber !== undefined) {
-      member.social.phoneNumber = member.social.phoneNumber
-         .replaceAll(/[ \,\-\(\)a-z]/gi, "")
-         .trim();
+      try {
+         member.social.phoneNumber = member.social.phoneNumber
+            .replaceAll(/[ \,\-\(\)a-z]/gi, "")
+            .trim();
+      } catch {
+         member.social.phoneNumber = member.social.phoneNumber;
+      }
    }
 
    if (member.social.instagram === "") {
