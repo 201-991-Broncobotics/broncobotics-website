@@ -149,7 +149,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
          revalidate: 3600,
       };
    }
-   
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

@@ -18,6 +18,7 @@ import checkTitle from "../../components/utils/checkTitle";
 import Header from "../../components/Header";
 import { auth } from "../../components/firebase/auth";
 import Footer from "../../components/Footer";
+import getPossibleTitles from "../../components/utils/getPossibleTitles";
 
 /*
  * holy fuck this is so unreadable i am so sorry to anyone who is trying to work on this page
@@ -55,19 +56,29 @@ let UserReal = ({ user }: { user: UserCredential }) => {
    let [member, setMember] = useState<undefined | MemberPageTypeUndefined>(
       undefined
    );
+
    let title = member?.title;
    let setTitle = (title: string) => {
       setMember({ ...member, title: title.trim().toLowerCase() });
    };
 
-   let [titleTaken, setTitleTaken] = useState<boolean>(false);
-
    let [vex, setVex] = useState<boolean>(false);
    let [ftc, setftc] = useState<boolean>(false);
    let [frc, setfrc] = useState<boolean>(false);
    let [leadership, setleadership] = useState<boolean>(false);
+
    let [possibleTitles, setPossibleTitles] = useState<string[]>([]);
+
    let router = useRouter();
+
+   useEffect(() => {
+      let a = async () => {
+         setPossibleTitles(await getPossibleTitles(user));
+         setMember({ ...member, title: possibleTitles[0] });
+      };
+      a();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [user]);
 
    useEffect(() => {
       const q = query(
@@ -83,9 +94,11 @@ let UserReal = ({ user }: { user: UserCredential }) => {
             setTitle(querySnapshot.docs[0].id);
             router.replace("/members/edit");
          } else {
+            let a = user.user?.email as string;
             setMember({
                ...member,
                name: user.user.displayName as string,
+               graduatingYear: parseInt(a.replaceAll(/([a-z@])/gi, "")) + 2000,
                social: {
                   ...member?.social,
                   email: user.user.email as string,
@@ -99,43 +112,13 @@ let UserReal = ({ user }: { user: UserCredential }) => {
    useEffect(() => {}, []);
 
    useEffect(() => {
-      let a = async () => {
-         let b = await fetch(
-            `/api/members/memberPages?title=${encodeURI(
-               title?.trim() || "fdaewijnfioaewfniaweufiawuefiaw"
-            )}`
-         );
-         let c = await b.json();
-
-         // console.log(c);
-
-         if (Array.isArray(c)) {
-            setTitleTaken(false);
-         } else {
-            setTitleTaken(true);
-         }
-
-         if (title === "create") {
-            setTitleTaken(true);
-         }
-         if (title === "notfound") {
-            setTitleTaken(true);
-         }
-         if (title === "index") {
-            setTitleTaken(true);
-         }
-      };
-      a();
-   }, [title]);
-
-   useEffect(() => {
       setMember({
          ...member,
          currentTeams: [
             vex ? "VEX" : "",
             ftc ? "FTC" : "",
             frc ? "FRC" : "",
-            leadership ? "LEADERSHIP" : "",
+            leadership ? "Leadership" : "",
          ],
       });
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -143,26 +126,27 @@ let UserReal = ({ user }: { user: UserCredential }) => {
 
    let handleSubmit = async () => {
       console.log("test");
-      if (titleTaken) {
-         alert("Please choose a title that isn't taken!");
-      }
 
       if (member?.title === undefined) {
          alert("Please add a title");
+         return;
       }
       if (member?.graduatingYear === undefined) {
          alert("Please add a graduating year");
+         return;
       }
 
       if (member?.name === undefined) {
          alert(
             "There was an error getting your name. please reload and try again"
          );
+         return;
       }
       if (member?.social?.email === undefined) {
          alert(
             "There was an error getting your email. please reload and try again"
          );
+         return;
       }
 
       const { doc, setDoc } = await import("firebase/firestore/lite");
@@ -184,7 +168,11 @@ let UserReal = ({ user }: { user: UserCredential }) => {
                               email: member.social.email,
                               github: member.social.github || "",
                               twitter: member.social.twitter || "",
-                              phoneNumber: member.social.phoneNumber || "",
+                              phoneNumber:
+                                 member.social.phoneNumber?.replaceAll(
+                                    /( ,-\(\))/g,
+                                    ""
+                                 ) || "",
                            },
                         };
 
@@ -241,26 +229,30 @@ let UserReal = ({ user }: { user: UserCredential }) => {
       <div>
          {/* <div>{user.user.email}</div>
          <div>{user.user.displayName}</div> */}
+         {typeof window}
          <div>{JSON.stringify(member)}</div>
+         {/* <div>{JSON.stringify(possibleTitles)}</div> */}
          <div>
             <p>Name: {member?.name}</p>
-            <p>
-               Graduating Year (Number):{" "}
-               <input
-                  type="number"
-                  value={member?.graduatingYear}
-                  className="w-full"
-                  onChange={(event) =>
-                     setMember({
-                        ...member,
-                        graduatingYear: parseInt(event.target.value),
-                     })
-                  }
-               />
-            </p>
+            <p>Graduating Year: {member?.graduatingYear}</p>
             <p className="w-full">
                Title: {title}. This means the link to your page will be{" "}
                {`/members/${title}`}
+               <select
+                  name="title"
+                  id="title"
+                  className="ml-5"
+                  value={title}
+                  onChange={(event) => setTitle(event.target.value)}
+               >
+                  {possibleTitles.map((title, index) => {
+                     return (
+                        <option key={index} value={title}>
+                           {title}
+                        </option>
+                     );
+                  })}
+               </select>
             </p>
             <p>
                Current Teams:
@@ -360,7 +352,7 @@ let UserReal = ({ user }: { user: UserCredential }) => {
                <input
                   type="text"
                   name="Phone Number"
-                  value={member?.social?.phoneNumber}
+                  value={member?.social?.phoneNumber || ""}
                   onChange={(event) =>
                      setMember({
                         ...member,

@@ -16,7 +16,11 @@ export default async function handler(
    if (docSnap.exists()) {
       let a = docSnap.data();
       a["title"] = title;
-      res.send(cleanMember(a as MemberPageType));
+      try {
+         res.send(cleanMember(a as MemberPageType));
+      } catch {
+         res.send(["DOES NOT EXIST"]);
+      }
    } else {
       res.send(["DOES NOT EXIST"]);
    }
