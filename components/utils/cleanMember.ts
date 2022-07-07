@@ -24,7 +24,10 @@ let cleanMember = (member: MemberPageType): MemberPageType => {
 
    if (member.social.phoneNumber === "") {
       delete member["social"]["phoneNumber"];
-   } else if (member.social.phoneNumber !== undefined) {
+   } else if (
+      typeof member.social.phoneNumber === "string" &&
+      member.social.phoneNumber.length !== 0
+   ) {
       try {
          member.social.phoneNumber = member.social.phoneNumber
             .replaceAll(/[ \,\-\(\)a-z]/gi, "")

@@ -13,7 +13,6 @@ import type {
 
 import { liteDb } from "../../components/firebase/litedb";
 import cleanMember from "../../components/utils/cleanMember";
-import checkTitle from "../../components/utils/checkTitle";
 
 import Header from "../../components/Header";
 import { auth } from "../../components/firebase/auth";
@@ -74,11 +73,17 @@ let UserReal = ({ user }: { user: UserCredential }) => {
    useEffect(() => {
       let a = async () => {
          setPossibleTitles(await getPossibleTitles(user));
-         setMember({ ...member, title: possibleTitles[0] });
+         // setMember({ ...member, title: possibleTitles[0] });
       };
       a();
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [user]);
+
+   useEffect(() => {
+      setMember((m) => {
+         return { ...m, title: possibleTitles[0] };
+      });
+   }, [possibleTitles]);
 
    useEffect(() => {
       const q = query(
@@ -108,8 +113,6 @@ let UserReal = ({ user }: { user: UserCredential }) => {
       });
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
-
-   useEffect(() => {}, []);
 
    useEffect(() => {
       setMember({
@@ -186,8 +189,8 @@ let UserReal = ({ user }: { user: UserCredential }) => {
                         .then((a) => {
                            if (a) {
                               if (a === 500) {
-                                 fetch("/members")
-                                 fetch(`/members/${member!.title}`)
+                                 fetch("/members");
+                                 fetch(`/members/${member!.title}`);
                                  alert(
                                     "Data set in database, but the page was not rerendered. visit the page in 30 minutes to see the changes"
                                  );
@@ -229,11 +232,7 @@ let UserReal = ({ user }: { user: UserCredential }) => {
 
    return (
       <div>
-         {/* <div>{user.user.email}</div>
-         <div>{user.user.displayName}</div> */}
-         {typeof window}
          <div>{JSON.stringify(member)}</div>
-         {/* <div>{JSON.stringify(possibleTitles)}</div> */}
          <div>
             <p>Name: {member?.name}</p>
             <p>Graduating Year: {member?.graduatingYear}</p>
