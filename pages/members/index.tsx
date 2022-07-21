@@ -1,13 +1,12 @@
 import { useMemo } from "react";
 import { useState } from "react";
 import Link from "next/link";
-import { collection, query, where, getDocs } from "firebase/firestore";
 import Fuse from "fuse.js";
 
 import type { ReactNode } from "react";
 import type { InferGetStaticPropsType } from "next";
 
-import { db } from "../../components/firebase/db";
+import { db } from "../../lib/firebase/db";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -133,15 +132,21 @@ const MemberList = (props: MemberListProps) => {
 };
 
 export const getStaticProps = async () => {
-   let a = await getDocs(query(collection(db, "realNames")));
+   // let a = await getDocs(query(collection(db, "realNames")));
+
+   let a = await db.collection("realNames").get();
 
    let b = a.docs.map(async (m) => {
       let a = m.data();
-      const q = query(
-         collection(db, "members"),
-         where("social.email", "==", a.email)
-      );
-      const querySnapshot = await getDocs(q);
+      // const q = query(
+      //    collection(db, "members"),
+      //    where("social.email", "==", a.email)
+      // );
+      // const querySnapshot = await getDocs(q);
+      const querySnapshot = await db
+         .collection("members")
+         .where("social.email", "==", a.email)
+         .get();
       let c: MemberType;
       if (!querySnapshot.empty) {
          c = {

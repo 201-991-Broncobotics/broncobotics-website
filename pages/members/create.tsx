@@ -1,6 +1,5 @@
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
-import { collection, query, where, getDocs } from "firebase/firestore/lite";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
@@ -11,21 +10,23 @@ import type {
    MemberPageTypeNoTitle,
 } from "./[member]";
 
-import { liteDb } from "../../components/firebase/litedb";
-import cleanMember from "../../components/utils/cleanMember";
+import { liteDb } from "../../lib/firebase/litedb";
+import cleanMember from "../../lib/utils/cleanMember";
 
 import Header from "../../components/Header";
-import { auth } from "../../components/firebase/auth";
+import { auth } from "../../lib/firebase/auth";
 import Footer from "../../components/Footer";
-import getPossibleTitles from "../../components/utils/getPossibleTitles";
+import getPossibleTitles from "../../lib/utils/getPossibleTitles";
 
 /*
  * holy fuck this is so unreadable i am so sorry to anyone who is trying to work on this page
- * it also has way too many js imports so it will take forever to load :)
  * it also exposes firebase api keys but i think thats fine?? but this is definitely react hell
  * at least its strongly typed that should help??
  */
 
+/**
+ * This function is what loads to make you log in with your google account.
+ */
 const Create = () => {
    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
 
@@ -51,6 +52,10 @@ const Create = () => {
    );
 };
 
+/**
+ * this is basically the main function it just needs a sign in step before it happens.
+ * the prop is the user returned by firebase auth.
+ */
 let UserReal = ({ user }: { user: UserCredential }) => {
    let [member, setMember] = useState<undefined | MemberPageTypeUndefined>(
       undefined
@@ -60,6 +65,7 @@ let UserReal = ({ user }: { user: UserCredential }) => {
    let setTitle = (title: string) => {
       setMember({ ...member, title: title.trim().toLowerCase() });
    };
+   let [exists, setExists] = useState<boolean>(false);
 
    let [vex, setVex] = useState<boolean>(false);
    let [ftc, setftc] = useState<boolean>(false);
@@ -72,11 +78,14 @@ let UserReal = ({ user }: { user: UserCredential }) => {
 
    useEffect(() => {
       let a = async () => {
-         setPossibleTitles(await getPossibleTitles(user));
+         let a = await getPossibleTitles(user).then((a) => {
+            console.log(a);
+            return a;
+         });
+         setPossibleTitles(a);
          // setMember({ ...member, title: possibleTitles[0] });
       };
       a();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [user]);
 
    useEffect(() => {
@@ -86,31 +95,32 @@ let UserReal = ({ user }: { user: UserCredential }) => {
    }, [possibleTitles]);
 
    useEffect(() => {
-      const q = query(
-         collection(liteDb, "members"),
-         where("social.email", "==", user.user.email)
-      );
-      getDocs(q).then((querySnapshot) => {
-         if (!querySnapshot.empty) {
-            setMember(
-               cleanMember(querySnapshot.docs[0].data() as MemberPageType)
-            );
-            console.log(querySnapshot.docs[0].data());
-            setTitle(querySnapshot.docs[0].id);
-            router.replace("/members/edit");
-         } else {
-            let a = user.user?.email as string;
-            setMember({
-               ...member,
-               name: user.user.displayName as string,
-               graduatingYear: parseInt(a.replaceAll(/([a-z@])/gi, "")) + 2000,
-               social: {
-                  ...member?.social,
-                  email: user.user.email as string,
-               },
-            });
-         }
-      });
+      fetch(
+         `/api/members/memberPages?email=${encodeURI(
+            user.user.email as string
+         )}`
+      )
+         .then(async (a) => await a.json())
+         .then((value: MemberPageType | ["DOES NOT EXIST"]) => {
+            if (!Array.isArray(value)) {
+               setMember(cleanMember(value));
+               setExists(true);
+               setTitle(value.title);
+            } else {
+               let a = user.user?.email as string;
+               setMember({
+                  ...member,
+                  name: user.user.displayName as string,
+                  graduatingYear:
+                     parseInt(a.replaceAll(/([a-z@])/gi, "")) + 2000, // the RegEx basically selects all letters + "@", so once we add 2000, we get the graduation year
+                  social: {
+                     ...member?.social,
+                     email: user.user.email as string,
+                  },
+               });
+               setExists(false);
+            }
+         });
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
@@ -128,8 +138,6 @@ let UserReal = ({ user }: { user: UserCredential }) => {
    }, [vex, ftc, frc, leadership]);
 
    let handleSubmit = async () => {
-      console.log("test");
-
       if (member?.title === undefined) {
          alert("Please add a title");
          return;
@@ -179,7 +187,11 @@ let UserReal = ({ user }: { user: UserCredential }) => {
                            },
                         };
 
-                     setDoc(doc(liteDb, "members", member.title), a)
+                     // setDoc(doc(liteDb, "members", member.title), a)
+                     fetch(`/api/members/memberPages?title=${member.title}`, {
+                        method: "POST",
+                        body: JSON.stringify(a),
+                     })
                         .then(async () => {
                            let a = await fetch(
                               `/api/revalidate/${member?.title || "aefawfea"}`
@@ -237,23 +249,27 @@ let UserReal = ({ user }: { user: UserCredential }) => {
             <p>Name: {member?.name}</p>
             <p>Graduating Year: {member?.graduatingYear}</p>
             <p className="w-full">
-               Title: {title}. This means the link to your page will be{" "}
-               {`/members/${title}`}
-               <select
-                  name="title"
-                  id="title"
-                  className="ml-5"
-                  value={title}
-                  onChange={(event) => setTitle(event.target.value)}
-               >
-                  {possibleTitles.map((title, index) => {
-                     return (
-                        <option key={index} value={title}>
-                           {title}
-                        </option>
-                     );
-                  })}
-               </select>
+               Title: {title}. This means the link to your page will be
+               {` /members/${title}`}
+               {!exists ? (
+                  <select
+                     name="title"
+                     id="title"
+                     className="ml-5"
+                     value={title}
+                     onChange={(event) => setTitle(event.target.value)}
+                  >
+                     {possibleTitles.map((title, index) => {
+                        return (
+                           <option key={index} value={title}>
+                              {title}
+                           </option>
+                        );
+                     })}
+                  </select>
+               ) : (
+                  ""
+               )}
             </p>
             <p>
                Current Teams:
@@ -390,3 +406,5 @@ const Wrapper = () => {
 };
 
 export default Wrapper;
+
+

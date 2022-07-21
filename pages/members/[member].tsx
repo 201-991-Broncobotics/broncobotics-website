@@ -3,10 +3,10 @@ import type { GetStaticProps, GetStaticPaths } from "next";
 import { collection, getDocs, getDoc, doc } from "firebase/firestore";
 import Head from "next/head";
 
-import { db } from "../../components/firebase/db";
+import { db } from "../../lib/firebase/db";
 
 import Header from "../../components/Header";
-import cleanMember from "../../components/utils/cleanMember";
+import cleanMember from "../../lib/utils/cleanMember";
 import { SocialButton } from "../socials/index";
 import noPicture from "../../public/no_picture.png";
 
@@ -126,11 +126,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
    let b = context.params || { member: "faewuhfiuaewhifuawefiua" };
    let title = (b.member as string) || "AsdfawiefiasiBHBSDAJFHB";
 
-   const docRef = doc(db, "members", title);
-   let docSnap = await getDoc(docRef);
+   // const docRef = doc(db, "members", title);
+   // let docSnap = await getDoc(docRef);
 
-   if (docSnap.exists()) {
-      let a = docSnap.data();
+   let docSnap = await db.collection("members").doc(title).get();
+
+   if (docSnap.exists) {
+      let a = docSnap.data() as FirebaseFirestore.DocumentData; // I can do this without being scared because if it is undefined then docSnap.exists would be false
       a["title"] = title;
 
       return {
@@ -158,7 +160,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
       };
    }[] = [];
 
-   let querySnapshot = await getDocs(collection(db, "members"));
+   // let querySnapshot = await getDocs(collection(db, "members"));
+   let querySnapshot = await db.collection("members").get();
    querySnapshot.forEach((doc) => {
       paths.push({ params: { member: doc.id } });
    });

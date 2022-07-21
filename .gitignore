@@ -38,3 +38,8 @@ firebase/*.js
 # firebase 
 *firebase*
 *firestore*
+!lib/firebase
+
+# vercel
+.vercel
+**/*.env*

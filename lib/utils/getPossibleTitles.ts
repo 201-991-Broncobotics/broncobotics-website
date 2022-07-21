@@ -2,7 +2,12 @@ import checkTitle from "./checkTitle";
 
 import type { UserCredential } from "firebase/auth";
 
-let getPossibleTitles = async (user: UserCredential) => {
+/**
+ * abstraction function that returns a promise of a list of possible, unused, titles for a member.
+ * @param {UserCredential} user - The firebase auth user to check.
+ * @returns a promise of a list of possible, unused, titles for a member.
+ */
+let getPossibleTitles = async (user: UserCredential): Promise<string[]> => {
    let a: Array<string> = [
       user.user.displayName?.toLowerCase().replaceAll(/([ ,-])/g, ""), // remove spaces, commas, and dashes
       user.user.email?.toLowerCase().replaceAll("@brophybroncos.org", ""), // removes @brophybroncos.org
